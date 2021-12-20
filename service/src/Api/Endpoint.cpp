@@ -5,9 +5,6 @@
 using namespace Reminder::Api;
 using namespace Reminder::Core;
 using namespace crow;
-<<<<<<< HEAD
-// ToDo List
-=======
 
 /*
   GET Reminder
@@ -23,7 +20,6 @@ using namespace crow;
   GET Board
 
 */
->>>>>>> 17aa6c4f77ad5778052fb9f94fb058529c1ad012
 Endpoint::Endpoint(SimpleApp &givenApp, Manager &givenManager) : app(givenApp),
                                                                  manager(givenManager) {
     registerRoutes();
@@ -33,5 +29,4 @@ Endpoint::~Endpoint() {
 }
 
 void Endpoint::registerRoutes() {
-  
 }
