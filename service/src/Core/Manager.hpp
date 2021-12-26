@@ -13,6 +13,8 @@ class Manager {
   public:
     Manager(Reminder::Api::Parser::ParserIf &givenParser, Reminder::Repository::RepositoryIf &givenRepository);
     ~Manager();
+
+    std::string getDatabase();
 };
 
 } // namespace Core

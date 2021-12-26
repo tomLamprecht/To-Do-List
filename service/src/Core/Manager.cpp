@@ -12,3 +12,8 @@ Manager::Manager(ParserIf &givenParser, RepositoryIf &givenRepository)
 
 Manager::~Manager() {
 }
+
+string Manager::getDatabase() {
+
+    return repository.getDatabase();
+}
