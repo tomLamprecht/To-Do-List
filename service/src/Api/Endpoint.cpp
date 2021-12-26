@@ -67,7 +67,7 @@ void Endpoint::registerRoutes() {
 
             switch (req.method) {
             case HTTPMethod::Get: {
-                jsonColumn = manager.getLists(listID);
+                jsonColumn = manager.getList(listID);
                 break;
             }
             case HTTPMethod::Put: {
