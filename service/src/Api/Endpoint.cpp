@@ -71,7 +71,7 @@ void Endpoint::registerRoutes() {
                 break;
             }
             case HTTPMethod::Put: {
-                jsonColumn = manager.putLists(listID, req.body);
+                jsonColumn = manager.putList(listID, req.body);
                 break;
             }
             case HTTPMethod::Delete: {

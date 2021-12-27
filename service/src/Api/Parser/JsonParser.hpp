@@ -15,6 +15,16 @@ class JsonParser : public ParserIf {
     JsonParser(){};
     virtual ~JsonParser(){};
 
+    virtual std::string convertToApiString(Reminder::Core::Model::Board &board);
+    virtual std::string convertToApiString(Reminder::Core::Model::List &list);
+    virtual std::string convertToApiString(std::vector<Reminder::Core::Model::List> &lists);
+
+    virtual std::string convertToApiString(Reminder::Core::Model::ReminderItem &reminderItem);
+    virtual std::string convertToApiString(std::vector<Reminder::Core::Model::ReminderItem> &reminderItems);
+
+    virtual std::optional<Reminder::Core::Model::List> convertListToModel(int listId, std::string &request);
+    virtual std::optional<Reminder::Core::Model::ReminderItem> convertReminderItemToModel(int itemId, std::string &request);
+
     virtual std::string getEmptyResponseString() {
         return JsonParser::EMPTY_JSON;
     }

@@ -22,16 +22,43 @@ string Manager::getDatabase() {
 
 string Manager::getLists() {
     std::vector<List> lists = repository.getLists();
-    return "getLists";
+
+    return parser.convertToApiString(lists);
 }
 
 string Manager::postLists(std::string request) {
+    int const dummyId = -1;
+    std::optional<List> parsedListOptional = parser.convertListToModel(dummyId, request);
+    if (!parsedListOptional.has_value()) {
+        return parser.getEmptyResponseString();
+    }
 
-    return "postLists";
+    List parsedList = parsedListOptional.value();
+
+    std::optional<List> postedList = repository.postList(parsedList.getName(), parsedList.getPos());
+    if (postedList) {
+        return parser.convertToApiString(postedList.value());
+    } else {
+        return parser.getEmptyResponseString();
+    }
 }
-string Manager::putLists(int listID, std::string request) {
 
-    return "putLists";
+string Manager::putList(int listID, std::string request) {
+    std::optional<List> parsedListOptional = parser.convertListToModel(listID, request);
+
+    if (!parsedListOptional.has_value()) {
+        return parser.getEmptyResponseString();
+    }
+
+    List parsedList = parsedListOptional.value();
+
+    std::optional<List> putList = repository.putList(listID, parsedList.getName(), parsedList.getPos());
+
+    if (putList) {
+        return parser.convertToApiString(putList.value());
+    } else {
+        return parser.getEmptyResponseString();
+    }
 }
 
 string Manager::deleteLists(int listID) {
@@ -39,7 +66,12 @@ string Manager::deleteLists(int listID) {
 }
 
 string Manager::getList(int listID) {
-    return "getList";
+    std::optional<List> list = repository.getList(listID);
+    if (list) {
+        return parser.convertToApiString(list.value());
+    } else {
+        return parser.getEmptyResponseString();
+    }
 }
 
 string Manager::getReminders(int listID) {
