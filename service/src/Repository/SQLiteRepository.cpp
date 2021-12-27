@@ -124,7 +124,7 @@ std::optional<List> SQLiteRepository::putList(int id, std::string name, int posi
 void SQLiteRepository::deleteList(int id) {
     throw NotImplementedException();
 }
-std::vector<ReminderItem> SQLiteRepository::getReminderItem(int listId) {
+std::vector<ReminderItem> SQLiteRepository::getReminderItems(int listId) {
     throw NotImplementedException();
 }
 std::optional<ReminderItem> SQLiteRepository::getReminderItem(int listId, int itemId) {

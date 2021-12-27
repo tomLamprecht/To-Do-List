@@ -61,8 +61,8 @@ string Manager::putList(int listID, std::string request) {
     }
 }
 
-string Manager::deleteLists(int listID) {
-    return "deleteLists";
+void Manager::deleteList(int listID) {
+    repository.deleteList(listID);
 }
 
 string Manager::getList(int listID) {
@@ -75,20 +75,39 @@ string Manager::getList(int listID) {
 }
 
 string Manager::getReminders(int listID) {
-    return "getReminders";
+    std::vector<ReminderItem> items = repository.getReminderItems(listID);
+
+    return parser.convertToApiString(items);
 }
 string Manager::postReminder(int listID, std::string request) {
-    return "postReminder";
+    int const dummyId = -1;
+    std::optional<ReminderItem> parsedReminderOptional = parser.convertReminderItemToModel(dummyId, request);
+    if (!parsedReminderOptional.has_value())
+        return parser.getEmptyResponseString();
+
+    ReminderItem reminderItem = parsedReminderOptional.value();
+    std::optional<ReminderItem> postedItem = repository.postReminderItem(listID, reminderItem.getTitle(), reminderItem.getPos());
+
+    if (postedItem) {
+        return parser.convertToApiString(postedItem.value());
+    } else {
+        return parser.getEmptyResponseString();
+    }
 }
 
 string Manager::getReminder(int listID, int reminderID) {
-    return "getReminder";
+    std::optional<ReminderItem> reminder = repository.getReminderItem(listID, reminderID);
+
+    if (reminder) {
+        return parser.convertToApiString(reminder.value());
+    } else {
+        return parser.getEmptyResponseString();
+    }
 }
 
 string Manager::putItem(int listID, int reminderID, std::string request) {
     return "putItem";
 }
 
-string Manager::deleteItem(int listID, int reminderID) {
-    return "deleteItem";
+void Manager::deleteItem(int listID, int reminderID) {
 }

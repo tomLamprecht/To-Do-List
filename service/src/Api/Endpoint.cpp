@@ -75,7 +75,7 @@ void Endpoint::registerRoutes() {
                 break;
             }
             case HTTPMethod::Delete: {
-                manager.deleteLists(listID);
+                manager.deleteList(listID);
                 break;
             }
             default: {
