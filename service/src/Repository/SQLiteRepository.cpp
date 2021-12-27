@@ -116,7 +116,23 @@ std::optional<List> SQLiteRepository::getList(int id) {
     throw NotImplementedException();
 }
 std::optional<List> SQLiteRepository::postList(std::string name, int position) {
-    throw NotImplementedException();
+    string sqlPostList =
+        "INSERT INTO list('name', 'position') "
+        "VALUES('" +
+        name + "', '" + to_string(position) + "')";
+
+    int result = 0;
+    char *errorMessage = nullptr;
+
+    result = sqlite3_exec(database, sqlPostList.c_str(), NULL, 0, &errorMessage);
+    handleSQLError(result, errorMessage);
+
+    if (SQLITE_OK == result) {
+        int listId = sqlite3_last_insert_rowid(database);
+        return List(listId, name, position);
+    }
+
+    return std::nullopt;
 }
 std::optional<List> SQLiteRepository::putList(int id, std::string name, int position) {
     throw NotImplementedException();

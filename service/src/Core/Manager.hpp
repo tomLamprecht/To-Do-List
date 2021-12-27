@@ -16,7 +16,7 @@ class Manager {
 
     std::string getDatabase();
     std::string getLists();
-    std::string postLists(std::string request);
+    std::string postList(std::string request);
     std::string putList(int listID, std::string request);
     void deleteList(int listID);
     std::string getList(int listID);

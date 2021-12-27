@@ -11,6 +11,14 @@ class JsonParser : public ParserIf {
   private:
     static inline std::string const EMPTY_JSON = "{}";
 
+    bool isValidList(rapidjson::Document const &document);
+    rapidjson::Value getJsonValueFromModel(Reminder::Core::Model::ReminderItem const &item, rapidjson::Document::AllocatorType &allocator);
+    rapidjson::Value getJsonValueFromModel(Reminder::Core::Model::Board &board, rapidjson::Document::AllocatorType &allocator);
+    rapidjson::Value getJsonValueFromModel(Reminder::Core::Model::List const &list, rapidjson::Document::AllocatorType &allocator);
+    rapidjson::Value getJsonValueFromModels(std::vector<Reminder::Core::Model::ReminderItem> const &items, rapidjson::Document::AllocatorType &allocator);
+    rapidjson::Value getJsonValueFromModels(std::vector<Reminder::Core::Model::List> const &lists, rapidjson::Document::AllocatorType &allocator);
+    std::string jsonValueToString(rapidjson::Value const &json);
+
   public:
     JsonParser(){};
     virtual ~JsonParser(){};

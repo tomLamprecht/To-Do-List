@@ -26,7 +26,7 @@ string Manager::getLists() {
     return parser.convertToApiString(lists);
 }
 
-string Manager::postLists(std::string request) {
+string Manager::postList(std::string request) {
     int const dummyId = -1;
     std::optional<List> parsedListOptional = parser.convertListToModel(dummyId, request);
     if (!parsedListOptional.has_value()) {
