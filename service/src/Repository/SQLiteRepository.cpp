@@ -1,9 +1,12 @@
 #include "SQLiteRepository.hpp"
+#include "Core/Exception/NotImplementedException.hpp"
 #include <filesystem>
 #include <iostream>
 
 using namespace std;
 using namespace Reminder::Repository;
+using namespace Reminder::Core::Model;
+using namespace Reminder::Core::Exception;
 
 #ifdef RELEASE_SERVICE
 string const SQLiteRepository::databaseFile = "./data/reminder-app.db";
@@ -103,6 +106,38 @@ std::string SQLiteRepository::getDatabase() {
     result = sqlite3_exec(database, sqlQuery.c_str(), SQLiteRepository::queryCallback, &data, &errorMessage);
     handleSQLError(result, errorMessage);
     return data;
+}
+
+std::vector<List> SQLiteRepository::getLists() {
+    throw NotImplementedException();
+}
+
+std::optional<List> SQLiteRepository::getList(int id) {
+    throw NotImplementedException();
+}
+std::optional<List> SQLiteRepository::postList(std::string name, int position) {
+    throw NotImplementedException();
+}
+std::optional<List> SQLiteRepository::putList(int id, std::string name, int position) {
+    throw NotImplementedException();
+}
+void SQLiteRepository::deleteList(int id) {
+    throw NotImplementedException();
+}
+std::vector<ReminderItem> SQLiteRepository::getReminderItem(int listId) {
+    throw NotImplementedException();
+}
+std::optional<ReminderItem> SQLiteRepository::getReminderItem(int listId, int itemId) {
+    throw NotImplementedException();
+}
+std::optional<ReminderItem> SQLiteRepository::postReminderItem(int listId, std::string title, int position) {
+    throw NotImplementedException();
+}
+std::optional<ReminderItem> SQLiteRepository::putReminderItem(int listId, int itemId, std::string title, int position) {
+    throw NotImplementedException();
+}
+void SQLiteRepository::deleteItem(int columnId, int itemId) {
+    throw NotImplementedException();
 }
 
 int SQLiteRepository::queryCallback(void *data, int numberOfColumns, char **fieldValues, char **columnNames) {
