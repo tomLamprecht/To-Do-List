@@ -1,38 +1,38 @@
 #include "Reminder.hpp"
 
-using namespace Prog3::Core::Model;
+using namespace Reminder::Core::Model;
 
-Reminder::Reminder(int id, std::string givenTitle, int givenPosition, std::string givenTimestamp, bool givenFlag)
+ReminderItem::ReminderItem(int id, std::string givenTitle, int givenPosition, std::string givenTimestamp, bool givenFlag)
     : id(id), title(givenTitle), position(givenPosition), timestamp(givenTimestamp), flag(givenFlag) {}
 
-int Reminder::getId() const {
+int ReminderItem::getId() const {
     return id;
 }
 
-std::string Reminder::getTitle() const {
+std::string ReminderItem::getTitle() const {
     return title;
 }
 
-int Reminder::getPos() const {
+int ReminderItem::getPos() const {
     return position;
 }
 
-std::string Reminder::getTimestamp() const {
+std::string ReminderItem::getTimestamp() const {
     return timestamp;
 }
 
-void Reminder::setID(int givenID) {
+void ReminderItem::setID(int givenID) {
     id = givenID;
 }
 
-void Reminder::setTitle(std::string givenTitle) {
+void ReminderItem::setTitle(std::string givenTitle) {
     title = givenTitle;
 }
 
-void Reminder::setPos(int givenPos) {
+void ReminderItem::setPos(int givenPos) {
     position = givenPos;
 }
 
-void Reminder::setTimestamp(std::string givenTime) {
+void ReminderItem::setTimestamp(std::string givenTime) {
     timestamp = givenTime;
 }

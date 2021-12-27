@@ -2,14 +2,14 @@
 
 #include <string>
 
-namespace Prog3 {
+namespace Reminder {
 namespace Core {
 namespace Model {
 
-class Reminder {
+class ReminderItem {
   public:
-    Reminder(int id, std::string givenTitle, int givenPosition, std::string givenTimestamp, bool givenFlag);
-    ~Reminder(){};
+    ReminderItem(int id, std::string givenTitle, int givenPosition, std::string givenTimestamp, bool givenFlag);
+    ~ReminderItem(){};
 
     int getId() const;
     std::string getTitle() const;
@@ -33,4 +33,4 @@ class Reminder {
 
 } // namespace Model
 } // namespace Core
-} // namespace Prog3
+} // namespace Reminder

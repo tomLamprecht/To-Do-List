@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace Prog3 {
+namespace Reminder {
 namespace Core {
 namespace Model {
 

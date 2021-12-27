@@ -1,6 +1,6 @@
 #include "Board.hpp"
 
-using namespace Prog3::Core::Model;
+using namespace Reminder::Core::Model;
 
 Board::Board() {}
 

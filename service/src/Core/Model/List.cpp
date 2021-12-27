@@ -1,6 +1,6 @@
 #include "List.hpp"
 
-using namespace Prog3::Core::Model;
+using namespace Reminder::Core::Model;
 
 List::List(int id, std::string givenName, int givenPosition)
     : id(id), name(givenName), position(givenPosition) {}
@@ -17,7 +17,7 @@ int List::getPos() const {
     return position;
 }
 
-std::vector<Reminder> List::getReminders() const {
+std::vector<ReminderItem> List::getReminders() const {
     return reminders;
 }
 
@@ -33,6 +33,6 @@ void List::setPos(int givenPos) {
     position = givenPos;
 }
 
-void List::addReminder(Reminder &givenReminder) {
+void List::addReminder(ReminderItem &givenReminder) {
     reminders.push_back(givenReminder);
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Core/Model/Board.hpp"
 #include <string>
 
 namespace Reminder {
