@@ -24,9 +24,9 @@ class Manager {
     std::string getReminders(int listID);
     std::string postReminder(int listID, std::string request);
 
-    std::string getReminder(int listID, int reminderID);
-    std::string putItem(int listID, int reminderID, std::string request);
-    void deleteItem(int listID, int reminderID);
+    std::string getReminder(int reminderID);
+    std::string putReminder(int reminderID, std::string request);
+    void deleteReminder(int reminderID);
 };
 
 } // namespace Core

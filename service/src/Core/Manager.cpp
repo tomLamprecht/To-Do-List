@@ -95,8 +95,8 @@ string Manager::postReminder(int listID, std::string request) {
     }
 }
 
-string Manager::getReminder(int listID, int reminderID) {
-    std::optional<ReminderItem> reminder = repository.getReminderItem(listID, reminderID);
+string Manager::getReminder(int reminderID) {
+    std::optional<ReminderItem> reminder = repository.getReminderItem(reminderID);
 
     if (reminder) {
         return parser.convertToApiString(reminder.value());
@@ -105,9 +105,9 @@ string Manager::getReminder(int listID, int reminderID) {
     }
 }
 
-string Manager::putItem(int listID, int reminderID, std::string request) {
+string Manager::putReminder(int reminderID, std::string request) {
     return "putItem";
 }
 
-void Manager::deleteItem(int listID, int reminderID) {
+void Manager::deleteReminder(int reminderID) {
 }

@@ -116,15 +116,15 @@ void Endpoint::registerRoutes() {
 
             switch (req.method) {
             case HTTPMethod::Get: {
-                jsonItem = manager.getReminder(listID, reminderID);
+                jsonItem = manager.getReminder(reminderID);
                 break;
             }
             case HTTPMethod::Put: {
-                jsonItem = manager.putItem(listID, reminderID, req.body);
+                jsonItem = manager.putReminder(reminderID, req.body);
                 break;
             }
             case HTTPMethod::Delete: {
-                manager.deleteItem(listID, reminderID);
+                manager.deleteReminder(reminderID);
                 break;
             }
             default: {
