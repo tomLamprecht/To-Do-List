@@ -4,6 +4,10 @@
 #include "Core/Exception/NotImplementedException.hpp"
 #include "rapidjson/stringbuffer.h"
 #include "rapidjson/writer.h"
+#include <ctime>
+#include <iomanip>
+#include <iostream>
+#include <sstream>
 
 using namespace rapidjson;
 using namespace std;
@@ -76,7 +80,12 @@ string JsonParser::convertToApiString(std::vector<List> &lists) {
 }
 
 string JsonParser::convertToApiString(ReminderItem &reminderItem) {
-    throw NotImplementedException();
+    string result = EMPTY_JSON;
+    Document document(kObjectType);
+
+    Value jsonItem = getJsonValueFromModel(reminderItem, document.GetAllocator());
+    result = jsonValueToString(jsonItem);
+    return result;
 }
 
 string JsonParser::convertToApiString(std::vector<ReminderItem> &reminderItems) {
@@ -111,8 +120,35 @@ bool JsonParser::isValidList(rapidjson::Document const &document) {
     return isValid;
 }
 
+bool JsonParser::isValidItem(rapidjson::Document const &document) {
+
+    bool isValid = true;
+    if (document.HasParseError()) {
+        isValid = false;
+    }
+    if (false == document["title"].IsString()) {
+        isValid = false;
+    }
+    if (false == document["position"].IsInt()) {
+        isValid = false;
+    }
+
+    return isValid;
+}
+
 std::optional<ReminderItem> JsonParser::convertReminderItemToModel(int itemId, std::string &request) {
-    throw NotImplementedException();
+    std::optional<ReminderItem> resultItem;
+
+    Document document;
+    document.Parse(request.c_str());
+
+    if (true == isValidItem(document)) {
+        std::string title = document["title"].GetString();
+        int position = document["position"].GetInt();
+
+        resultItem = ReminderItem(itemId, title, position, "", false);
+    }
+    return resultItem;
 }
 
 string JsonParser::jsonValueToString(rapidjson::Value const &json) {
