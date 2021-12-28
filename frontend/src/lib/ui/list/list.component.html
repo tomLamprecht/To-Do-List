@@ -1,0 +1,14 @@
+<div class="card-container">
+  <div class="title">
+    <!-- {{title}} -->
+    <input class="inputList"[value]="title" />
+  </div>
+  <reminderItem *ngFor="let reminderItem of reminderItems"
+    [title]="reminderItem.title"
+    [idReminderItem]="reminderItem.id"
+    >
+  </reminderItem>
+  <!-- <div (click)="addEmptyItem()" class="addButtonContainer">
+    <img class="addButton" src="assets/add-button.svg"/>
+  </div> -->
+</div>

@@ -1,0 +1,14 @@
+<div class="board">
+  <div class="title">{{ title }}</div>
+  <div *ngFor="let list of lists">
+    <list
+      [idList]="list.id"
+      [title]="list.name"
+      [reminderItems]="list.reminderItems"
+      >
+  </list>
+  </div>
+  <!-- <div (click)="addEmptyColumn()" class="addButtonContainer">
+    <img class="addButton" src="assets/add-button.svg"/>
+  </div> -->
+</div>
