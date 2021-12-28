@@ -37,7 +37,7 @@ class SQLiteRepository : public RepositoryIf {
     virtual std::optional<Reminder::Core::Model::ReminderItem> getReminderItem(int itemId);
     virtual std::optional<Reminder::Core::Model::ReminderItem> postReminderItem(int listId, std::string title, int position);
     virtual std::optional<Reminder::Core::Model::ReminderItem> putReminderItem(int listId, int itemId, std::string title, int position);
-    virtual void deleteItem(int itemId);
+    virtual void deleteReminder(int id);
 };
 
 } // namespace Repository

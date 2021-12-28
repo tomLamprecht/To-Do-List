@@ -110,4 +110,5 @@ string Manager::putReminder(int reminderID, std::string request) {
 }
 
 void Manager::deleteReminder(int reminderID) {
+    repository.deleteReminder(reminderID);
 }

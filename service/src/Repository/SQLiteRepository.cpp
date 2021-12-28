@@ -249,24 +249,18 @@ std::optional<ReminderItem> SQLiteRepository::postReminderItem(int listId, std::
     if (!listExist)
         return std::nullopt;
 
-    auto t = std::time(nullptr);
-    auto tm = *std::localtime(&t);
-    std::ostringstream oss;
-    oss << std::put_time(&tm, "%d-%m-%Y %H-%M-%S");
-    auto timestamp = oss.str();
-
     int result = 0;
     char *errorMessage = nullptr;
     string sqlPost = "INSERT INTO reminder('title', 'timestamp', 'position', 'list_id', 'flag') "
                      "VALUES (' " +
-                     title + "', '" + timestamp + "', '" + to_string(position) + "' , '" + to_string(listId) + "' , " + "0);";
+                     title + "', '" + "', '" + to_string(position) + "' , '" + to_string(listId) + "' , " + "0);";
 
     result = sqlite3_exec(database, sqlPost.c_str(), NULL, 0, &errorMessage);
     handleSQLError(result, errorMessage);
 
     if (SQLITE_OK == result) {
         int itemId = sqlite3_last_insert_rowid(database);
-        return ReminderItem(itemId, title, position, timestamp, 0);
+        return ReminderItem(itemId, title, position, "", 0);
     }
     return std::nullopt;
 }
@@ -274,8 +268,13 @@ std::optional<ReminderItem> SQLiteRepository::postReminderItem(int listId, std::
 std::optional<ReminderItem> SQLiteRepository::putReminderItem(int listId, int itemId, std::string title, int position) {
     throw NotImplementedException();
 }
-void SQLiteRepository::deleteItem(int itemId) {
-    throw NotImplementedException();
+void SQLiteRepository::deleteReminder(int id) {
+    string sqlDelete = "DELETE FROM reminder WHERE id=" + to_string(id) + ";";
+    char *errorMessage = nullptr;
+    int result = 0;
+
+    result = sqlite3_exec(database, sqlDelete.c_str(), NULL, 0, &errorMessage);
+    handleSQLError(result, errorMessage);
 }
 
 //--------------------------------------------------------------callback methods-------------------------------------------------------------
