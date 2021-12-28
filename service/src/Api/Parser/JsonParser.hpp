@@ -10,7 +10,7 @@ namespace Parser {
 class JsonParser : public ParserIf {
   private:
     static inline std::string const EMPTY_JSON = "{}";
-
+    std::string toBoolString(bool givenBool);
     bool isValidList(rapidjson::Document const &document);
     rapidjson::Value getJsonValueFromModel(Reminder::Core::Model::ReminderItem const &item, rapidjson::Document::AllocatorType &allocator);
     rapidjson::Value getJsonValueFromModel(Reminder::Core::Model::Board &board, rapidjson::Document::AllocatorType &allocator);

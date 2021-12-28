@@ -30,12 +30,19 @@ rapidjson::Value JsonParser::getJsonValueFromModel(List const &list, rapidjson::
     return jsonColumn;
 }
 
+string JsonParser::toBoolString(bool givenBool) {
+    if (givenBool)
+        return "true";
+    return "false";
+}
+
 rapidjson::Value JsonParser::getJsonValueFromModel(ReminderItem const &item, rapidjson::Document::AllocatorType &allocator) {
     Value jsonItem(kObjectType);
     jsonItem.AddMember("id", item.getId(), allocator);
     jsonItem.AddMember("title", Value(item.getTitle().c_str(), allocator), allocator);
     jsonItem.AddMember("position", item.getPos(), allocator);
     jsonItem.AddMember("timestamp", Value(item.getTimestamp().c_str(), allocator), allocator);
+    jsonItem.AddMember("flag", Value(toBoolString(item.isFlagged()).c_str(), allocator), allocator);
 
     return jsonItem;
 }

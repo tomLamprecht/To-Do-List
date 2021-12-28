@@ -51,6 +51,7 @@ void SQLiteRepository::initialize() {
         "timestamp text not null,"
         "position integer not null,"
         "list_id integer not null,"
+        "flag integer not null,"
         "unique (position, list_id),"
         "foreign key (list_id) references list (id));";
 
@@ -87,12 +88,12 @@ void SQLiteRepository::createDummyData() {
     handleSQLError(result, errorMessage);
 
     string sqlInserDummyItems =
-        "insert into reminder (title, timestamp, position, list_id)"
+        "insert into reminder (title, timestamp, position, list_id, flag)"
         "VALUES"
-        "(\"in plan\", date('now'), 1, 1),"
-        "(\"some running task\", date('now'), 1, 2),"
-        "(\"finished task 1\", date('now'), 1, 3),"
-        "(\"finished task 2\", date('now'), 2, 3);";
+        "(\"in plan\", date('now'), 1, 1, 1),"
+        "(\"some running task\", date('now'), 1, 2, 0),"
+        "(\"finished task 1\", date('now'), 1, 3, 1),"
+        "(\"finished task 2\", date('now'), 2, 3, 0);";
 
     result = sqlite3_exec(database, sqlInserDummyItems.c_str(), NULL, 0, &errorMessage);
     handleSQLError(result, errorMessage);
@@ -113,7 +114,24 @@ std::vector<List> SQLiteRepository::getLists() {
 }
 
 std::optional<List> SQLiteRepository::getList(int id) {
-    throw NotImplementedException();
+    string sqlSelect = "SELECT * FROM list WHERE id=" + to_string(id) + ";";
+    char *errorMessage = nullptr;
+    //this is done to reserve the needed memory
+    List list(-1, "", 0);
+
+    vector<ReminderItem> tempItems = getReminderItems(id);
+
+    int result = sqlite3_exec(database, sqlSelect.c_str(), SQLiteRepository::getListCallback, &list, &errorMessage);
+    handleSQLError(result, errorMessage);
+
+    for (auto item : tempItems) {
+        list.addReminder(item);
+    }
+
+    if (result != SQLITE_OK || list.getId() == -1)
+        return nullopt;
+
+    return list;
 }
 std::optional<List> SQLiteRepository::postList(std::string name, int position) {
     string sqlPostList =
@@ -141,7 +159,18 @@ void SQLiteRepository::deleteList(int id) {
     throw NotImplementedException();
 }
 std::vector<ReminderItem> SQLiteRepository::getReminderItems(int listId) {
-    throw NotImplementedException();
+    string itemSqlSelect = "SELECT * FROM reminder WHERE list_id=" + to_string(listId) + ";";
+    char *errorMessage = nullptr;
+    vector<ReminderItem> tempItems;
+    vector<ReminderItem> *items = &tempItems;
+    int answer = sqlite3_exec(database, itemSqlSelect.c_str(), SQLiteRepository::getReminderItemCallback, items, &errorMessage);
+    handleSQLError(answer, errorMessage);
+
+    if (answer != SQLITE_OK) {
+        vector<ReminderItem> emptyVector;
+        return emptyVector;
+    }
+    return tempItems;
 }
 std::optional<ReminderItem> SQLiteRepository::getReminderItem(int listId, int itemId) {
     throw NotImplementedException();
@@ -156,6 +185,8 @@ void SQLiteRepository::deleteItem(int columnId, int itemId) {
     throw NotImplementedException();
 }
 
+//--------------------------------------------------------------callback methods-------------------------------------------------------------
+
 int SQLiteRepository::queryCallback(void *data, int numberOfColumns, char **fieldValues, char **columnNames) {
     string *stringPointer = static_cast<string *>(data);
     for (int i = 0; i < numberOfColumns; i++) {
@@ -164,5 +195,41 @@ int SQLiteRepository::queryCallback(void *data, int numberOfColumns, char **fiel
             *stringPointer = *stringPointer + ",";
     }
     *stringPointer = *stringPointer + ";";
+    return 0;
+}
+
+int SQLiteRepository::getListCallback(void *data, int numberOfColumns, char **fieldValues, char **columnNames) {
+    List *list = static_cast<List *>(data);
+    vector<std::string> values;
+    for (int i = 0; i < numberOfColumns; i++) {
+        values.push_back(*(fieldValues++));
+    }
+    int id = std::stoi(values[0]);
+    string title = values[1];
+    int position = std::stoi(values[2]);
+
+    list->setID(id);
+    list->setName(title);
+    list->setPos(position);
+    return 0;
+}
+
+bool to_bool(std::string const &s) {
+    return s != "0";
+}
+
+int SQLiteRepository::getReminderItemCallback(void *data, int numberOfColumns, char **fieldValues, char **columnNames) {
+    vector<ReminderItem> *items = static_cast<vector<ReminderItem> *>(data);
+    vector<std::string> values;
+    for (int i = 0; i < numberOfColumns; i++) {
+        values.push_back(*(fieldValues++));
+    }
+    int id = std::stoi(values[0]);
+    string title = values[1];
+    string date = values[2];
+    int position = std::stoi(values[3]);
+    bool flag = to_bool(values[5]);
+    ReminderItem temp(id, title, position, date, flag);
+    items->push_back(temp);
     return 0;
 }

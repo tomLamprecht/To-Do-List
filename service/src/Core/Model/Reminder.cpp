@@ -36,3 +36,11 @@ void ReminderItem::setPos(int givenPos) {
 void ReminderItem::setTimestamp(std::string givenTime) {
     timestamp = givenTime;
 }
+
+void ReminderItem::setFlagged(bool givenFlag) {
+    flag = givenFlag;
+}
+
+bool ReminderItem::isFlagged() const {
+    return flag;
+}
