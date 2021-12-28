@@ -10,7 +10,7 @@ namespace Repository {
 class SQLiteRepository : public RepositoryIf {
   private:
     sqlite3 *database;
-    bool checkIfListExist(int id);
+    bool checkIfObjectExist(std::string table, int id);
 
   public:
     static int queryCallback(void *data, int numberOfColumns, char **fieldValues, char **columnNames);
@@ -36,7 +36,7 @@ class SQLiteRepository : public RepositoryIf {
     virtual std::vector<Reminder::Core::Model::ReminderItem> getReminderItems(int listId);
     virtual std::optional<Reminder::Core::Model::ReminderItem> getReminderItem(int itemId);
     virtual std::optional<Reminder::Core::Model::ReminderItem> postReminderItem(int listId, std::string title, int position);
-    virtual std::optional<Reminder::Core::Model::ReminderItem> putReminderItem(int listId, int itemId, std::string title, int position);
+    virtual std::optional<Reminder::Core::Model::ReminderItem> putReminderItem(int itemId, std::string title, int position, std::string timestamp, bool flag);
     virtual void deleteReminder(int id);
 };
 
