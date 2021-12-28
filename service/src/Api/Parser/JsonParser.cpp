@@ -47,6 +47,15 @@ rapidjson::Value JsonParser::getJsonValueFromModel(ReminderItem const &item, rap
     return jsonItem;
 }
 
+rapidjson::Value JsonParser::getJsonValueFromModels(std::vector<Reminder::Core::Model::List> const &lists, rapidjson::Document::AllocatorType &allocator) {
+    Value jsonColumns(kArrayType);
+    for (List const &list : lists) {
+        Value jsonColumn = getJsonValueFromModel(list, allocator);
+        jsonColumns.PushBack(jsonColumn, allocator);
+    }
+    return jsonColumns;
+}
+
 string JsonParser::convertToApiString(Board &board) {
     throw NotImplementedException();
 }
@@ -59,7 +68,11 @@ string JsonParser::convertToApiString(List &list) {
 }
 
 string JsonParser::convertToApiString(std::vector<List> &lists) {
-    throw NotImplementedException();
+    string result = EMPTY_JSON;
+    Document document(kObjectType);
+    Value jsonItem = getJsonValueFromModels(lists, document.GetAllocator());
+    result = jsonValueToString(jsonItem);
+    return result;
 }
 
 string JsonParser::convertToApiString(ReminderItem &reminderItem) {

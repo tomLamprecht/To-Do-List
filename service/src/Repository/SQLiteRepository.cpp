@@ -110,7 +110,25 @@ std::string SQLiteRepository::getDatabase() {
 }
 
 std::vector<List> SQLiteRepository::getLists() {
-    throw NotImplementedException();
+    string itemSqlSelect = "SELECT id FROM list;";
+    char *errorMessage = nullptr;
+    vector<int> ids;
+    int answer = sqlite3_exec(database, itemSqlSelect.c_str(), SQLiteRepository::getIdCallback, &ids, &errorMessage);
+    handleSQLError(answer, errorMessage);
+
+    if (answer != SQLITE_OK) {
+        vector<List> emptyVector;
+        return emptyVector;
+    }
+    vector<List> columns;
+
+    for (auto id : ids) {
+        optional<List> temp = getList(id);
+        if (temp.has_value()) {
+            columns.push_back(temp.value());
+        }
+    }
+    return columns;
 }
 
 std::optional<List> SQLiteRepository::getList(int id) {
@@ -153,11 +171,39 @@ std::optional<List> SQLiteRepository::postList(std::string name, int position) {
     return std::nullopt;
 }
 std::optional<List> SQLiteRepository::putList(int id, std::string name, int position) {
-    throw NotImplementedException();
+    int result = 0;
+    char *errorMessage = nullptr;
+    int gotCalled = 0;
+    string sqlSelectList = "SELECT * FROM list WHERE id = " + to_string(id) + ";";
+    string sqlUpdateList = "UPDATE list SET name=\"" + name + "\", position = " + to_string(position) + " WHERE id = " + to_string(id) + ";";
+    result = sqlite3_exec(database, sqlSelectList.c_str(), SQLiteRepository::gotCalledCallback, &gotCalled, &errorMessage);
+    handleSQLError(result, errorMessage);
+
+    if (!gotCalled) {
+        return std::nullopt;
+    }
+
+    vector<ReminderItem> items = getReminderItems(id);
+
+    errorMessage = nullptr;
+    result = sqlite3_exec(database, sqlUpdateList.c_str(), NULL, 0, &errorMessage);
+    handleSQLError(result, errorMessage);
+
+    List returnList(id, name, position);
+    for (auto item : items) {
+        returnList.addReminder(item);
+    }
+    return returnList;
 }
 void SQLiteRepository::deleteList(int id) {
-    throw NotImplementedException();
+    string sqlDelete = "DELETE FROM list WHERE id=" + to_string(id) + ";";
+    char *errorMessage = nullptr;
+    int result = 0;
+
+    result = sqlite3_exec(database, sqlDelete.c_str(), NULL, 0, &errorMessage);
+    handleSQLError(result, errorMessage);
 }
+
 std::vector<ReminderItem> SQLiteRepository::getReminderItems(int listId) {
     string itemSqlSelect = "SELECT * FROM reminder WHERE list_id=" + to_string(listId) + ";";
     char *errorMessage = nullptr;
@@ -231,5 +277,20 @@ int SQLiteRepository::getReminderItemCallback(void *data, int numberOfColumns, c
     bool flag = to_bool(values[5]);
     ReminderItem temp(id, title, position, date, flag);
     items->push_back(temp);
+    return 0;
+}
+
+int SQLiteRepository::getIdCallback(void *data, int numberOfColumns, char **fieldValues, char **columnNames) {
+    if (numberOfColumns == 0) {
+        return 0;
+    }
+    vector<int> *ids = static_cast<vector<int> *>(data);
+    ids->push_back(stoi(fieldValues[0]));
+    return 0;
+}
+
+int SQLiteRepository::gotCalledCallback(void *data, int numberOfColumns, char **fieldValues, char **columnNames) {
+    int *intData = static_cast<int *>(data);
+    (*intData) = 1;
     return 0;
 }

@@ -15,6 +15,8 @@ class SQLiteRepository : public RepositoryIf {
     static int queryCallback(void *data, int numberOfColumns, char **fieldValues, char **columnNames);
     static int getListCallback(void *data, int numberOfColumns, char **fieldValues, char **columnNames);
     static int getReminderItemCallback(void *data, int numberOfColumns, char **fieldValues, char **columnNames);
+    static int getIdCallback(void *data, int numberOfColumns, char **fieldValues, char **columnNames);
+    static int gotCalledCallback(void *data, int numberOfColumns, char **fieldValues, char **columnNames);
 
     SQLiteRepository();
     virtual ~SQLiteRepository();
