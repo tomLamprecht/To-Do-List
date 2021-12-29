@@ -21,6 +21,8 @@ class RepositoryIf {
     virtual std::optional<Reminder::Core::Model::ReminderItem> postReminderItem(int listId, std::string title, int position) = 0;
     virtual std::optional<Reminder::Core::Model::ReminderItem> putReminderItem(int itemId, std::string title, int position, std::string timestamp, bool flag) = 0;
     virtual void deleteReminder(int id) = 0;
+    virtual std::optional<Reminder::Core::Model::List> getRemindersWithFlag() = 0;
+    virtual std::optional<Reminder::Core::Model::List> getRemindersWithTimestamp(std::string timestamp) = 0;
 };
 
 } // namespace Repository

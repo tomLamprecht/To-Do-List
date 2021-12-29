@@ -125,3 +125,22 @@ string Manager::putReminder(int reminderID, std::string request) {
 void Manager::deleteReminder(int reminderID) {
     repository.deleteReminder(reminderID);
 }
+
+std::string Manager::getRemindersWithFlag() {
+    std::optional<List> remindersWithFlag = repository.getRemindersWithFlag();
+
+    if (remindersWithFlag) {
+        return parser.convertToApiString(remindersWithFlag.value());
+    } else {
+        return parser.getEmptyResponseString();
+    }
+}
+
+std::string Manager::getRemindersWithTimestamp(std::string timestamp) {
+    std::optional<List> remindersWithTimestamp = repository.getRemindersWithTimestamp(timestamp);
+
+    if (remindersWithTimestamp) {
+        return parser.convertToApiString(remindersWithTimestamp.value());
+    }
+    return parser.getEmptyResponseString();
+}

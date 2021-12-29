@@ -265,11 +265,15 @@ std::optional<ReminderItem> SQLiteRepository::postReminderItem(int listId, std::
     return std::nullopt;
 }
 
+inline std::string const boolToString(bool b) {
+    return b ? "1" : "0";
+}
+
 std::optional<ReminderItem> SQLiteRepository::putReminderItem(int itemId, std::string title, int position, string timestamp, bool flag) {
     int result = 0;
     char *errorMessage = nullptr;
     bool gotCalled = checkIfObjectExist("reminder", itemId);
-    string sqlUpdateItem = "UPDATE reminder SET title=\"" + title + "\", position = " + to_string(position) + ", timestamp = \"" + timestamp + ", flag =\"" + "\" WHERE id = " + to_string(itemId) + ";";
+    string sqlUpdateItem = "UPDATE reminder SET title=\"" + title + "\", position = " + to_string(position) + ", timestamp = \"" + timestamp + ", flag =\"" + boolToString(flag) + "\" WHERE id = " + to_string(itemId) + ";";
 
     if (!gotCalled) {
         return std::nullopt;
@@ -288,6 +292,37 @@ void SQLiteRepository::deleteReminder(int id) {
 
     result = sqlite3_exec(database, sqlDelete.c_str(), NULL, 0, &errorMessage);
     handleSQLError(result, errorMessage);
+}
+
+//The method expects a SQL statement which results are entries of the "reminder" table
+//Every other statement could lead to a crash
+std::optional<List> SQLiteRepository::getListOfRemindersBySQL(string sqlStatement, string listName) {
+    char *errorMessage = nullptr;
+    int result = 0;
+    vector<ReminderItem> reminders;
+    result = sqlite3_exec(database, sqlStatement.c_str(), SQLiteRepository::getReminderItemCallback, &reminders, &errorMessage);
+    handleSQLError(result, errorMessage);
+
+    if (size(reminders) == 0)
+        return std::nullopt;
+
+    List tmpList(-1, listName, -1);
+
+    for (auto reminder : reminders) {
+        tmpList.addReminder(reminder);
+    }
+
+    return tmpList;
+}
+
+std::optional<List> SQLiteRepository::getRemindersWithFlag() {
+    string sqlFind = "SELECT * FROM reminder WHERE flag=\"1\";";
+    return getListOfRemindersBySQL(sqlFind, "Flag List");
+}
+
+std::optional<List> SQLiteRepository::getRemindersWithTimestamp(std::string timestamp) {
+    string sqlFind = "SELECT * FROM reminder WHERE timestamp=" + timestamp + ";";
+    return getListOfRemindersBySQL(sqlFind, "Timestamp List");
 }
 
 //--------------------------------------------------------------callback methods-------------------------------------------------------------
