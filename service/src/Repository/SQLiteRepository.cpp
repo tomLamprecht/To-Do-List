@@ -171,11 +171,11 @@ std::optional<List> SQLiteRepository::postList(std::string name, int position) {
     return std::nullopt;
 }
 
-bool SQLiteRepository::checkIfListExist(int id) {
+bool SQLiteRepository::checkIfObjectExist(string table, int id) {
     int result = 0;
     char *errorMessage = nullptr;
     int gotCalled = 0;
-    string sqlSelectList = "SELECT * FROM list WHERE id = " + to_string(id) + ";";
+    string sqlSelectList = "SELECT * FROM " + table + " WHERE id = " + to_string(id) + ";";
     result = sqlite3_exec(database, sqlSelectList.c_str(), SQLiteRepository::gotCalledCallback, &gotCalled, &errorMessage);
     handleSQLError(result, errorMessage);
 
@@ -188,7 +188,7 @@ bool SQLiteRepository::checkIfListExist(int id) {
 std::optional<List> SQLiteRepository::putList(int id, std::string name, int position) {
     int result = 0;
     char *errorMessage = nullptr;
-    bool gotCalled = checkIfListExist(id);
+    bool gotCalled = checkIfObjectExist("list", id);
     string sqlUpdateList = "UPDATE list SET name=\"" + name + "\", position = " + to_string(position) + " WHERE id = " + to_string(id) + ";";
 
     if (!gotCalled) {
@@ -245,37 +245,84 @@ std::optional<ReminderItem> SQLiteRepository::getReminderItem(int itemId) {
 }
 
 std::optional<ReminderItem> SQLiteRepository::postReminderItem(int listId, std::string title, int position) {
-    bool listExist = checkIfListExist(listId);
+    bool listExist = checkIfObjectExist("list", listId);
     if (!listExist)
         return std::nullopt;
-
-    auto t = std::time(nullptr);
-    auto tm = *std::localtime(&t);
-    std::ostringstream oss;
-    oss << std::put_time(&tm, "%d-%m-%Y %H-%M-%S");
-    auto timestamp = oss.str();
 
     int result = 0;
     char *errorMessage = nullptr;
     string sqlPost = "INSERT INTO reminder('title', 'timestamp', 'position', 'list_id', 'flag') "
                      "VALUES (' " +
-                     title + "', '" + timestamp + "', '" + to_string(position) + "' , '" + to_string(listId) + "' , " + "0);";
+                     title + "', '" + "', '" + to_string(position) + "' , '" + to_string(listId) + "' , " + "0);";
 
     result = sqlite3_exec(database, sqlPost.c_str(), NULL, 0, &errorMessage);
     handleSQLError(result, errorMessage);
 
     if (SQLITE_OK == result) {
         int itemId = sqlite3_last_insert_rowid(database);
-        return ReminderItem(itemId, title, position, timestamp, 0);
+        return ReminderItem(itemId, title, position, "", 0);
     }
     return std::nullopt;
 }
 
-std::optional<ReminderItem> SQLiteRepository::putReminderItem(int listId, int itemId, std::string title, int position) {
-    throw NotImplementedException();
+inline std::string const boolToString(bool b) {
+    return b ? "1" : "0";
 }
-void SQLiteRepository::deleteItem(int itemId) {
-    throw NotImplementedException();
+
+std::optional<ReminderItem> SQLiteRepository::putReminderItem(int itemId, std::string title, int position, string timestamp, bool flag) {
+    int result = 0;
+    char *errorMessage = nullptr;
+    bool gotCalled = checkIfObjectExist("reminder", itemId);
+    string sqlUpdateItem = "UPDATE reminder SET title=\"" + title + "\", position = " + to_string(position) + ", timestamp = \"" + timestamp + ", flag =\"" + boolToString(flag) + "\" WHERE id = " + to_string(itemId) + ";";
+
+    if (!gotCalled) {
+        return std::nullopt;
+    }
+
+    result = sqlite3_exec(database, sqlUpdateItem.c_str(), NULL, 0, &errorMessage);
+    handleSQLError(result, errorMessage);
+
+    return ReminderItem(itemId, title, position, timestamp, flag);
+}
+
+void SQLiteRepository::deleteReminder(int id) {
+    string sqlDelete = "DELETE FROM reminder WHERE id=" + to_string(id) + ";";
+    char *errorMessage = nullptr;
+    int result = 0;
+
+    result = sqlite3_exec(database, sqlDelete.c_str(), NULL, 0, &errorMessage);
+    handleSQLError(result, errorMessage);
+}
+
+//The method expects a SQL statement which results are entries of the "reminder" table
+//Every other statement could lead to a crash
+std::optional<List> SQLiteRepository::getListOfRemindersBySQL(string sqlStatement, string listName) {
+    char *errorMessage = nullptr;
+    int result = 0;
+    vector<ReminderItem> reminders;
+    result = sqlite3_exec(database, sqlStatement.c_str(), SQLiteRepository::getReminderItemCallback, &reminders, &errorMessage);
+    handleSQLError(result, errorMessage);
+
+    if (size(reminders) == 0)
+        return std::nullopt;
+
+    List tmpList(-1, listName, -1);
+
+    for (auto reminder : reminders) {
+        tmpList.addReminder(reminder);
+    }
+
+    return tmpList;
+}
+
+std::optional<List> SQLiteRepository::getRemindersWithFlag() {
+    string sqlFind = "SELECT * FROM reminder WHERE flag=\"1\";";
+    return getListOfRemindersBySQL(sqlFind, "Flag List");
+}
+
+std::optional<List> SQLiteRepository::getRemindersWithTimestamp(std::string timestamp) {
+    string sqlFind = "SELECT * FROM reminder WHERE timestamp=" + timestamp + ";";
+    return getListOfRemindersBySQL(sqlFind, "Timestamp List");
 }
 
 //--------------------------------------------------------------callback methods-------------------------------------------------------------

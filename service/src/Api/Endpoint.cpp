@@ -110,8 +110,8 @@ void Endpoint::registerRoutes() {
             res.end();
         });
 
-    CROW_ROUTE(app, "/api/board/lists/<int>/reminders/<int>")
-        .methods("GET"_method, "PUT"_method, "DELETE"_method)([this](const request &req, response &res, int listID, int reminderID) {
+    CROW_ROUTE(app, "/api/board/reminders/<int>")
+        .methods("GET"_method, "PUT"_method, "DELETE"_method)([this](const request &req, response &res, int reminderID) {
             std::string jsonItem;
 
             switch (req.method) {
@@ -135,4 +135,18 @@ void Endpoint::registerRoutes() {
             res.write(jsonItem);
             res.end();
         });
+
+    CROW_ROUTE(app, "/api/board/reminders/withFlag")
+    ([this](const request &req, response &res) {
+        std::string answer = manager.getRemindersWithFlag();
+        res.write(answer);
+        res.end();
+    });
+
+    CROW_ROUTE(app, "/api/board/reminders/withTimestamp/<string>")
+    ([this](const request &req, response &res, std::string timestamp) {
+        std::string answer = manager.getRemindersWithTimestamp(timestamp);
+        res.write(answer);
+        res.end();
+    });
 }

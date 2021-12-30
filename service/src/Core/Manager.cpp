@@ -106,8 +106,41 @@ string Manager::getReminder(int reminderID) {
 }
 
 string Manager::putReminder(int reminderID, std::string request) {
-    return "putItem";
+
+    std::optional parsedItemOptional = parser.convertReminderItemToModel(reminderID, request);
+    if (false == parsedItemOptional.has_value()) {
+        return parser.getEmptyResponseString();
+    }
+
+    ReminderItem reminder = parsedItemOptional.value();
+    std::optional<ReminderItem> putItem = repository.putReminderItem(reminderID, reminder.getTitle(), reminder.getPos(), reminder.getTimestamp(), reminder.isFlagged());
+
+    if (putItem) {
+        return parser.convertToApiString(putItem.value());
+    } else {
+        return parser.getEmptyResponseString();
+    }
 }
 
 void Manager::deleteReminder(int reminderID) {
+    repository.deleteReminder(reminderID);
+}
+
+std::string Manager::getRemindersWithFlag() {
+    std::optional<List> remindersWithFlag = repository.getRemindersWithFlag();
+
+    if (remindersWithFlag) {
+        return parser.convertToApiString(remindersWithFlag.value());
+    } else {
+        return parser.getEmptyResponseString();
+    }
+}
+
+std::string Manager::getRemindersWithTimestamp(std::string timestamp) {
+    std::optional<List> remindersWithTimestamp = repository.getRemindersWithTimestamp(timestamp);
+
+    if (remindersWithTimestamp) {
+        return parser.convertToApiString(remindersWithTimestamp.value());
+    }
+    return parser.getEmptyResponseString();
 }

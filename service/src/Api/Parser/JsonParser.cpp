@@ -145,8 +145,10 @@ std::optional<ReminderItem> JsonParser::convertReminderItemToModel(int itemId, s
     if (true == isValidItem(document)) {
         std::string title = document["title"].GetString();
         int position = document["position"].GetInt();
+        string timestamp = document["timestamp"].GetString();
+        bool flag = document["flag"].GetBool();
 
-        resultItem = ReminderItem(itemId, title, position, "", false);
+        resultItem = ReminderItem(itemId, title, position, timestamp, flag);
     }
     return resultItem;
 }
