@@ -6,6 +6,7 @@
   <reminderItem *ngFor="let reminderItem of reminderItems"
     [title]="reminderItem.title"
     [idReminderItem]="reminderItem.id"
+    (deleteReminderItemEvent)="deleteReminderItem(reminderItem)"
     >
   </reminderItem>
   <div (click)="addEmptyReminderItem()" class="addButtonContainer">

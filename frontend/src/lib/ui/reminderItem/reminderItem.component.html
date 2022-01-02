@@ -1,4 +1,8 @@
 <div class="card">
-  <input class="inputReminderItem" [value]="title"/>
-  <input class="inputReminderItem" type="date">
+  <img *ngIf="!checkboxMarked" (click)="timerDeleteReminderItem()" class="checkboxButton" src="assets/checkbox_unchecked.svg"/>
+  <img *ngIf="checkboxMarked" (click)="checkboxMarked=false" class="checkboxButton" src="assets/checkbox_checked.svg"/>
+  <div class="reminderItem">
+    <input class="inputReminderItem" [value]="title"/>
+    <input class="inputReminderItem" type="date">
+  </div>
 </div>

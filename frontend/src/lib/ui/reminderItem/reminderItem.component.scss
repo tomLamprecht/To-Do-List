@@ -7,12 +7,10 @@
   margin: 0 8px 16px;
   padding: 16px;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   transition: all 0.2s ease-in-out;
   line-height: 24px;
-  flex-direction: column;
 }
 
 .card:hover {
@@ -49,4 +47,17 @@
   border: none;
   background-color: transparent;
   width: 80%;
+}
+
+.checkboxButton {
+  height: 18px;
+  color: rgb(254, 254, 254);
+  margin-right: 5px;
+}
+
+.checkboxButton:hover {
+  --red: #f31c00;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 17px rgba(red, 0.288);
+  background-color: rgb(red, 0.14);
 }

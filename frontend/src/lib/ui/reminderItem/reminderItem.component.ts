@@ -12,4 +12,20 @@ export class ReminderItemComponent {
   @Input()
   idReminderItem = 'reminderItem';
 
+  @Output()
+  deleteReminderItemEvent = new EventEmitter();
+
+  checkboxMarked:boolean = false;
+
+  timerDeleteReminderItem() {
+    this.checkboxMarked=true;
+    setTimeout(()=>{this.deleteReminderItem()}, 3000);
+  }
+
+  deleteReminderItem() {
+    if(this.checkboxMarked) {
+      this.deleteReminderItemEvent.emit();
+    }
+  }
+
 }

@@ -27,4 +27,10 @@ export class ListComponent {
     });
   }
 
+  deleteReminderItem(reminderItem:ReminderItemModel) {
+    console.log("in list");
+    var index = this.reminderItems.indexOf(reminderItem);
+    this.reminderItems.splice(index, 1);
+  }
+
 }
