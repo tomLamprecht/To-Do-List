@@ -17,13 +17,14 @@ export class ListComponent {
   reminderItems: ReminderItemModel[];
 
 
-  // addEmptyItem() {
-  //   this.items.push({
-  //     id: (Math.random() * 10000) | 0,
-  //     title: 'empty',
-  //     position: 0,
-  //     timestamp: '',
-  //   });
-  // }
+  addEmptyReminderItem() {
+    this.reminderItems.push({
+      id: (Math.random() * 10000) | 0,
+      title: 'empty',
+      flag: false,
+      position: 0,
+      timestamp: '',
+    });
+  }
 
 }

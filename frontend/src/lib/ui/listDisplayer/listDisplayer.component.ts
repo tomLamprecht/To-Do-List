@@ -12,7 +12,7 @@ export class ListDisplayerComponent {
 
   @Input()
   displayList: ListModel;
-  
+
 
 
   //@Input()
@@ -84,29 +84,5 @@ export class ListDisplayerComponent {
   //   // },
   // ];
 
-  // addEmptyColumn() {
-  //   this.columns.push({
-  //     id: (Math.random() * 10000) | 0,
-  //     name: 'Empty',
-  //     position: 0,
-  //     items: [],
-  //   });
-  // }
-
-  // deleteColumn(column:ColumnModel) {
-  //   var index = this.columns.indexOf(column);
-  //   this.columns.splice(index, 1);
-  // }
-
-  // changeColumnTitle(column, event) {
-  //   column.name = event;
-  // }
-
-  // ngAfterViewInit() {
-  //   var tmp = document.createElement("input");
-  //   document.body.appendChild(tmp);
-  //   tmp.focus();
-  //   document.body.removeChild(tmp);
-  // }
 
 }
