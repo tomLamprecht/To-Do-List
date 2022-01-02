@@ -1,15 +1,24 @@
-<div class="board">
-  <div class="title">{{ title }}</div>
-  <!-- <listHeader></listHeader> -->
-  <div *ngFor="let list of lists">
-    <list
-      [idList]="list.id"
-      [title]="list.name"
-      [reminderItems]="list.reminderItems"
-      >
-  </list>
+<div class="boardContainer">
+
+<div class="container">
+  <div class="filterContainer">
+    <div class="todayContainer">
+      <div class="quantity">1</div>
+      <img width="30" src="assets/calender-button-icon.svg"/>
+      Today
+    </div>
+
+    <div class="space"></div>
+
+    <div class="flaggedContainer">
+      <div class="quantity">0</div>
+      <img width="40" src="assets/flag-icon.svg"/>
+      Flagged
+    </div>
   </div>
-  <!-- <div (click)="addEmptyColumn()" class="addButtonContainer">
-    <img class="addButton" src="assets/add-button.svg"/>
-  </div> -->
+
+  <div class="listContainer"><listHeaderContainer [lists]="lists" (onDisplay)="updateDisplayList($event)"></listHeaderContainer></div>
+</div>
+<listDisplayer [displayList]="displayList"></listDisplayer>
+
 </div>
