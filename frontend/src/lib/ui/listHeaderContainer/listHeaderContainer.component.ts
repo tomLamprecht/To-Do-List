@@ -23,7 +23,7 @@ export class ListHeaderContainerComponent {
    addEmptyList() {
     this.lists.push({
       id: (Math.random() * 10000) | 0,
-      name: 'Empty',
+      name: 'new List',
       position: 0,
       reminderItems: [],
     });

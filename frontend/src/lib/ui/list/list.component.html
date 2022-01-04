@@ -1,12 +1,16 @@
 <div class="card-container">
   <div class="title">
     <!-- {{title}} -->
-    <input class="inputList"[value]="title" />
+    <input class="inputList"[value]="title" (change)="onChangeTitle($event)" />
   </div>
   <reminderItem *ngFor="let reminderItem of reminderItems"
     [title]="reminderItem.title"
     [idReminderItem]="reminderItem.id"
+    [date]="reminderItem.timestamp"
     (deleteReminderItemEvent)="deleteReminderItem(reminderItem)"
+    (nameChangeEvent)="renameReminderItem(reminderItem, $event)"
+    (dateChangeEvent)="changeReminderDate(reminderItem, $event)"
+    (toggleFlagEvent)="onToggleFlag(reminderItem, $event)"
     >
   </reminderItem>
   <div (click)="addEmptyReminderItem()" class="addButtonContainer">

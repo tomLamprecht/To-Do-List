@@ -16,6 +16,9 @@ export class ListComponent {
   @Input()
   reminderItems: ReminderItemModel[];
 
+  @Output()
+  changeTitleEvent = new EventEmitter<string>();
+
 
   addEmptyReminderItem() {
     this.reminderItems.push({
@@ -28,9 +31,24 @@ export class ListComponent {
   }
 
   deleteReminderItem(reminderItem:ReminderItemModel) {
-    console.log("in list");
     var index = this.reminderItems.indexOf(reminderItem);
     this.reminderItems.splice(index, 1);
+  }
+
+  renameReminderItem(reminderItem, event) {
+    reminderItem.title = event;
+  }
+
+  changeReminderDate(reminderItem, event) {
+    reminderItem.timestamp = event;
+  }
+
+  onChangeTitle(event) {
+    this.changeTitleEvent.emit(event.target.value);
+  }
+
+  onToggleFlag(reminderItem:ReminderItemModel, flag:boolean) {
+    reminderItem.flag = flag;
   }
 
 }

@@ -52,7 +52,7 @@
 .checkboxButton {
   height: 18px;
   color: rgb(254, 254, 254);
-  margin-right: 5px;
+  // margin-right: 5px;
 }
 
 .checkboxButton:hover {
@@ -60,4 +60,9 @@
   transform: translateY(-3px);
   box-shadow: 0 4px 17px rgba(red, 0.288);
   background-color: rgb(red, 0.14);
+}
+
+.flagContainer {
+  height: 18px;
+  // margin-right: -10px;
 }

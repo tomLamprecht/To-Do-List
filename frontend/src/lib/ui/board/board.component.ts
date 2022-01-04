@@ -21,21 +21,21 @@ export class BoardComponent {
           id: 0,
           title: 'first task',
           position: 0,
-          timestamp: '2021-12-09T10:04:42.058Z',
+          timestamp: '2021-12-09',
           flag: false,
         },
         {
           id: 1,
           title: 'second task',
           position: 1,
-          timestamp: '2021-12-09T10:04:42.058Z',
+          timestamp: '2021-12-09',
           flag: false,
         },
         {
           id: 2,
           title: 'third task',
           position: 2,
-          timestamp: '2021-12-09T10:04:42.058Z',
+          timestamp: '2021-12-09',
           flag: false,
         },
       ],
@@ -50,7 +50,7 @@ export class BoardComponent {
           id: 3,
           title: 'my special first task',
           position: 0,
-          timestamp: '2021-12-09T10:04:42.058Z',
+          timestamp: '2021-12-09',
           flag: false,
         },
       ],
@@ -58,37 +58,14 @@ export class BoardComponent {
   ];
 
   @Input()
-  displayList: ListModel = {
-    id: 0,
-    name: 'to do',
-    position: 0,
-    reminderItems: [
-      {
-        id: 0,
-        title: 'first task',
-        position: 0,
-        timestamp: '2021-12-09T10:04:42.058Z',
-        flag: false,
-      },
-      {
-        id: 1,
-        title: 'second task',
-        position: 1,
-        timestamp: '2021-12-09T10:04:42.058Z',
-        flag: false,
-      },
-      {
-        id: 2,
-        title: 'third task',
-        position: 2,
-        timestamp: '2021-12-09T10:04:42.058Z',
-        flag: false,
-      }
-    ]
-  };
+  displayList:ListModel;
 
   updateDisplayList(list:ListModel) {
     this.displayList=list;
+  }
+
+  changeListTitle(event) {
+    this.displayList.name = event;
   }
 
 }

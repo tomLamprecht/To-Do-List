@@ -12,13 +12,13 @@
 
     <div class="flaggedContainer">
       <div class="quantity">0</div>
-      <img width="40" src="assets/flag-icon.svg"/>
+      <img width="25" src="assets/flagged-icon.svg"/>
       Flagged
     </div>
   </div>
 
   <div class="listContainer"><listHeaderContainer [lists]="lists" (onDisplay)="updateDisplayList($event)"></listHeaderContainer></div>
 </div>
-<listDisplayer [displayList]="displayList"></listDisplayer>
+<listDisplayer [displayList]="displayList" (changeTitleEvent)="changeListTitle($event)"></listDisplayer>
 
 </div>

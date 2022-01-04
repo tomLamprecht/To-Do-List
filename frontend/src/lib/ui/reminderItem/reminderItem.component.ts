@@ -12,10 +12,23 @@ export class ReminderItemComponent {
   @Input()
   idReminderItem = 'reminderItem';
 
+  @Input()
+  date:string;
+
   @Output()
   deleteReminderItemEvent = new EventEmitter();
 
+  @Output()
+  nameChangeEvent = new EventEmitter<string>();
+
+  @Output()
+  dateChangeEvent = new EventEmitter<string>();
+
+  @Output()
+  toggleFlagEvent = new EventEmitter<boolean>();
+
   checkboxMarked:boolean = false;
+  flagged:boolean = false;
 
   timerDeleteReminderItem() {
     this.checkboxMarked=true;
@@ -26,6 +39,19 @@ export class ReminderItemComponent {
     if(this.checkboxMarked) {
       this.deleteReminderItemEvent.emit();
     }
+  }
+
+  onChangeName(event) {
+    this.nameChangeEvent.emit(event.target.value);
+  }
+
+  onChangeDate(event) {
+    this.dateChangeEvent.emit(event.target.value);
+  }
+
+  toggleFlag() {
+    this.flagged = !this.flagged;
+    this.toggleFlagEvent.emit(this.flagged);
   }
 
 }
