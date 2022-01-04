@@ -54,7 +54,6 @@ export class ListComponent {
   plsUnfocus:boolean = false;
 
   ngOnChanges(changes :SimpleChange){
-    console.log(changes["idList"]);
     if(changes["idList"] == undefined){
       this.plsUnfocus = false;
     }else{
