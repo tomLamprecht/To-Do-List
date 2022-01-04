@@ -64,8 +64,8 @@ export class BoardComponent {
     this.displayList=list;
   }
 
-  changeListTitle(event) {
-    this.displayList.name = event;
+  changeListTitle(event, list) {
+    list.name = event;
   }
 
 }

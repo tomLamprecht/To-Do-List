@@ -16,6 +16,7 @@ export class ListHeaderContainerComponent {
   @Output()
   onDisplay = new EventEmitter<ListModel>();
 
+
    emitOnDisplay(event) {
      this.onDisplay.emit(event);
    }
@@ -29,6 +30,9 @@ export class ListHeaderContainerComponent {
     });
   }
 
+  changeListTitle(list ,event){
+    list.name = event;
+  }
 
   // deleteColumn(column:ColumnModel) {
   //   var index = this.columns.indexOf(column);

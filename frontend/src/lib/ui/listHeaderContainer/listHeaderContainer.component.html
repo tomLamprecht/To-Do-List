@@ -2,6 +2,7 @@
   *ngFor="let list of lists"
   [list]="list"
   (onDisplay)="emitOnDisplay($event)"
+  (onTitleChangeEvent)="changeListTitle(list, $event)"
   ></listHeader>
 
     <div (click)="addEmptyList()" class="addButtonContainer">

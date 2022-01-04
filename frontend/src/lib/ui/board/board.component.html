@@ -19,6 +19,6 @@
 
   <div class="listContainer"><listHeaderContainer [lists]="lists" (onDisplay)="updateDisplayList($event)"></listHeaderContainer></div>
 </div>
-<listDisplayer [displayList]="displayList" (changeTitleEvent)="changeListTitle($event)"></listDisplayer>
+<listDisplayer *ngIf="displayList != undefined" [displayList]="displayList" (changeTitleEvent)="changeListTitle($event, displayList)"></listDisplayer>
 
 </div>

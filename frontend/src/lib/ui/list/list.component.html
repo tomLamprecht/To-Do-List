@@ -1,7 +1,7 @@
 <div class="card-container">
   <div class="title">
     <!-- {{title}} -->
-    <input class="inputList"[value]="title" (change)="onChangeTitle($event)" />
+    <input class="inputList"[value]="title" (input)="onChangeTitle($event)" />
   </div>
   <reminderItem *ngFor="let reminderItem of reminderItems"
     [title]="reminderItem.title"
