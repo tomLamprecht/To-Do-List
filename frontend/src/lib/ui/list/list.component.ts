@@ -19,6 +19,8 @@ export class ListComponent {
   @Output()
   changeTitleEvent = new EventEmitter<string>();
 
+  @Output()
+  updateRequest = new EventEmitter<string>();
 
   addEmptyReminderItem() {
     this.reminderItems.push({
@@ -33,6 +35,7 @@ export class ListComponent {
   deleteReminderItem(reminderItem:ReminderItemModel) {
     var index = this.reminderItems.indexOf(reminderItem);
     this.reminderItems.splice(index, 1);
+    this.updateRequest.emit();
   }
 
   renameReminderItem(reminderItem, event) {
@@ -41,6 +44,7 @@ export class ListComponent {
 
   changeReminderDate(reminderItem, event) {
     reminderItem.timestamp = event;
+    this.updateRequest.emit();
   }
 
   onChangeTitle(event) {
@@ -49,6 +53,7 @@ export class ListComponent {
 
   onToggleFlag(reminderItem:ReminderItemModel, flag:boolean) {
     reminderItem.flag = flag;
+    this.updateRequest.emit();
   }
 
   plsUnfocus:boolean = false;

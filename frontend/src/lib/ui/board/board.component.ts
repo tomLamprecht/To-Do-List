@@ -6,6 +6,7 @@ import { ListModel } from 'src/lib/data-access/models/listModel';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
 })
+
 export class BoardComponent {
   @Input()
   title = 'board';
@@ -60,6 +61,14 @@ export class BoardComponent {
   @Input()
   displayList:ListModel;
 
+  @Input()
+  flagCounter:number = 5;
+
+  @Input()
+  todayCounter:number = 3;
+
+  updateReady:boolean =true;
+
   updateDisplayList(list:ListModel) {
     this.displayList=list;
   }
@@ -78,4 +87,13 @@ export class BoardComponent {
   ngAfterViewInit(){
     this.loseFocus();
   }
+
+  updateCounters(){
+    console.log("Updating...");
+    //flagCounter = service.getFlagList.size();
+    //todayCounter = service.getTodayList.size();
+
+  }
+
+
 }

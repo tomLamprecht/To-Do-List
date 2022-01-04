@@ -1,5 +1,5 @@
 <div class="listHeader" (click)="emitOnDisplay()">
-  <input #inputHeader (input)="onTitleChange($event)" onfocusout="disabled = true" class="input" [value]="list.name" disabled >
+  <input #inputHeader (change)="onTitleChange($event)" onfocusout="disabled = true" class="input" [value]="list.name" disabled >
   <img class="edit" src="assets/edit-symbol.svg" (click)="onEditClick($event)">
 
 </div>

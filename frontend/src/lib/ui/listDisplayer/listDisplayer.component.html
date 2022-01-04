@@ -6,6 +6,7 @@
       [title]="displayList.name"
       [reminderItems]="displayList.reminderItems"
       (changeTitleEvent)="onChangeTitle($event)"
+      (updateRequest)="updateRequest.emit()"
       >
   </list>
   </div>
