@@ -20,6 +20,19 @@ export class ListDisplayerComponent {
     this.changeTitleEvent.emit(event);
   }
 
+  ngOnChange(changes){
+    
+  }
 
+  ngAfterViewInit(){
+    this.loseFocus();
+  }
+
+  loseFocus(){
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);
+  }
 
 }

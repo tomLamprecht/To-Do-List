@@ -2,7 +2,7 @@
   <img *ngIf="!checkboxMarked" (click)="timerDeleteReminderItem()" class="checkboxButton" src="assets/checkbox_unchecked.svg"/>
   <img *ngIf="checkboxMarked" (click)="checkboxMarked=false" class="checkboxButton" src="assets/checkbox_checked.svg"/>
   <div class="reminderItem">
-    <input class="inputReminderItem" [value]="title" (change)="onChangeName($event)"/>
+    <input #inputName class="inputReminderItem" [value]="title" (change)="onChangeName($event)"/>
     <input class="inputReminderItem" type="date" [value]="date" (change)="onChangeDate($event)">
   </div>
   <img *ngIf="!flagged" (click)="toggleFlag()" class="flagContainer" src="assets/unflagged-icon.svg"/>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'reminderItem',
@@ -27,6 +27,8 @@ export class ReminderItemComponent {
   @Output()
   toggleFlagEvent = new EventEmitter<boolean>();
 
+  @ViewChild('inputName') input : ElementRef
+
   checkboxMarked:boolean = false;
   flagged:boolean = false;
 
@@ -54,4 +56,7 @@ export class ReminderItemComponent {
     this.toggleFlagEvent.emit(this.flagged);
   }
 
+  ngAfterViewInit(){
+    this.input.nativeElement.focus();
+  }
 }

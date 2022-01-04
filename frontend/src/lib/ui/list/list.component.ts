@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChange } from '@angular/core';
 import { ReminderItemModel } from '../../data-access/models/reminderItemModel';
 
 @Component({
@@ -49,6 +49,28 @@ export class ListComponent {
 
   onToggleFlag(reminderItem:ReminderItemModel, flag:boolean) {
     reminderItem.flag = flag;
+  }
+
+  plsUnfocus:boolean = false;
+
+  ngOnChanges(changes :SimpleChange){
+    console.log(changes["idList"]);
+    if(changes["idList"] == undefined){
+      this.plsUnfocus = false;
+    }else{
+      this.plsUnfocus = true;
+    }
+
+  }
+
+  ngAfterViewChecked(){
+    if(this.plsUnfocus){
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);
+    }
+    this.plsUnfocus = false;
   }
 
 }

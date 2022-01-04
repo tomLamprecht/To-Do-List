@@ -68,4 +68,14 @@ export class BoardComponent {
     list.name = event;
   }
 
+  loseFocus(){
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);
+  }
+
+  ngAfterViewInit(){
+    this.loseFocus();
+  }
 }
