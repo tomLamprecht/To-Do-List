@@ -3,6 +3,7 @@
   [list]="list"
   (onDisplay)="emitOnDisplay($event)"
   (onTitleChangeEvent)="changeListTitle(list, $event)"
+  (onDeleteEvent)="onDeleteList(list)"
   ></listHeader>
 
     <div (click)="addEmptyList()" class="addButtonContainer">

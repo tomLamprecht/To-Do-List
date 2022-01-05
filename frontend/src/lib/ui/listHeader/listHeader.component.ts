@@ -19,6 +19,9 @@ export class ListHeaderComponent {
   @Output()
   onTitleChangeEvent = new EventEmitter<string>();
 
+  @Output()
+  onDeleteEvent = new EventEmitter();
+
     @ViewChild('inputHeader') input : ElementRef
 
    emitOnDisplay() {
@@ -38,6 +41,11 @@ export class ListHeaderComponent {
     ngAfterViewInit(){
       this.input.nativeElement.disabled = false;
       this.input.nativeElement.focus();
+    }
+
+    onDelete(event){
+      event.stopPropagation();
+      this.onDeleteEvent.emit();
     }
 
 }

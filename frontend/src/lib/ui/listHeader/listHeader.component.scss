@@ -26,10 +26,14 @@
   border: transparent;
   width: 80%;
 }
-.edit {
+.symbol {
   width: 20px;
 }
 
-.edit:hover {
+.symbol:hover {
   transform: translateY(-3px);
+}
+
+.spacer{
+  width: 10px;
 }

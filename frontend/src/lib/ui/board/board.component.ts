@@ -95,5 +95,12 @@ export class BoardComponent {
 
   }
 
+  onDeleteList(list){
+    let index = this.lists.indexOf(list);
+    this.lists.splice(index,1);
+    if(this.displayList == list)
+      this.displayList = undefined;
+  }
+
 
 }

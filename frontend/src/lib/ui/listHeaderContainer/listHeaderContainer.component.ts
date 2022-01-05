@@ -16,6 +16,9 @@ export class ListHeaderContainerComponent {
   @Output()
   onDisplay = new EventEmitter<ListModel>();
 
+  @Output()
+  deleteListEvent = new EventEmitter<ListModel>();
+
 
    emitOnDisplay(event) {
      this.onDisplay.emit(event);
@@ -32,6 +35,11 @@ export class ListHeaderContainerComponent {
 
   changeListTitle(list ,event){
     list.name = event;
+  }
+
+  onDeleteList(list){
+    this.deleteListEvent.emit(list);
+
   }
 
   // deleteColumn(column:ColumnModel) {
