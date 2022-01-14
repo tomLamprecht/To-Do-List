@@ -12,7 +12,7 @@ namespace Model {
 
 class List {
   public:
-    List(int id, std::string givenName);
+    List(int id, std::string givenName, int givenPosition);
     ~List(){};
 
     int getId() const;
@@ -28,6 +28,7 @@ class List {
   private:
     int id;
     std::string name;
+    int position;
     std::vector<ReminderItem> reminders;
 };
 

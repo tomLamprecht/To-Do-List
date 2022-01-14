@@ -8,7 +8,7 @@ namespace Model {
 
 class ReminderItem {
   public:
-    ReminderItem(int id, std::string givenTitle, std::string givenTimestamp, bool givenFlag);
+    ReminderItem(int id, std::string givenTitle, int givenPosition, std::string givenTimestamp, bool givenFlag);
     ~ReminderItem(){};
 
     int getId() const;
@@ -26,6 +26,7 @@ class ReminderItem {
   private:
     int id;
     std::string title;
+    int position;
     std::string timestamp;
     bool flag;
 };
