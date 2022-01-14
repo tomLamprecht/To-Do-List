@@ -7,13 +7,14 @@
     [title]="reminderItem.title"
     [idReminderItem]="reminderItem.id"
     [date]="reminderItem.timestamp"
+    [flagged]="reminderItem.flag"
     (deleteReminderItemEvent)="deleteReminderItem(reminderItem)"
     (nameChangeEvent)="renameReminderItem(reminderItem, $event)"
     (dateChangeEvent)="changeReminderDate(reminderItem, $event)"
     (toggleFlagEvent)="onToggleFlag(reminderItem, $event)"
     >
   </reminderItem>
-  <div (click)="addEmptyReminderItem()" class="addButtonContainer">
+  <div *ngIf="idList != -1" (click)="addEmptyReminderItem()" class="addButtonContainer">
     <img class="addButton" src="assets/add-button.svg"/>
   </div>
 </div>

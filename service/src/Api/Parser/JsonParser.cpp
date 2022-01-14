@@ -29,7 +29,7 @@ rapidjson::Value JsonParser::getJsonValueFromModel(List const &list, rapidjson::
         jsonItems.PushBack(jsonItem, allocator);
     }
 
-    jsonColumn.AddMember("items", jsonItems, allocator);
+    jsonColumn.AddMember("reminderItems", jsonItems, allocator);
 
     return jsonColumn;
 }
@@ -46,7 +46,7 @@ rapidjson::Value JsonParser::getJsonValueFromModel(ReminderItem const &item, rap
     jsonItem.AddMember("title", Value(item.getTitle().c_str(), allocator), allocator);
     jsonItem.AddMember("position", item.getPos(), allocator);
     jsonItem.AddMember("timestamp", Value(item.getTimestamp().c_str(), allocator), allocator);
-    jsonItem.AddMember("flag", Value(toBoolString(item.isFlagged()).c_str(), allocator), allocator);
+    jsonItem.AddMember("flag", item.isFlagged(), allocator);
 
     return jsonItem;
 }

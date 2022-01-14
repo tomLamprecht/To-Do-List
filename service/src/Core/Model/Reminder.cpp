@@ -2,8 +2,8 @@
 
 using namespace Reminder::Core::Model;
 
-ReminderItem::ReminderItem(int id, std::string givenTitle, int givenPosition, std::string givenTimestamp, bool givenFlag)
-    : id(id), title(givenTitle), position(givenPosition), timestamp(givenTimestamp), flag(givenFlag) {}
+ReminderItem::ReminderItem(int id, std::string givenTitle, std::string givenTimestamp, bool givenFlag)
+    : id(id), title(givenTitle), timestamp(givenTimestamp), flag(givenFlag) {}
 
 int ReminderItem::getId() const {
     return id;
@@ -11,10 +11,6 @@ int ReminderItem::getId() const {
 
 std::string ReminderItem::getTitle() const {
     return title;
-}
-
-int ReminderItem::getPos() const {
-    return position;
 }
 
 std::string ReminderItem::getTimestamp() const {
@@ -27,10 +23,6 @@ void ReminderItem::setID(int givenID) {
 
 void ReminderItem::setTitle(std::string givenTitle) {
     title = givenTitle;
-}
-
-void ReminderItem::setPos(int givenPos) {
-    position = givenPos;
 }
 
 void ReminderItem::setTimestamp(std::string givenTime) {

@@ -16,10 +16,23 @@ export class ListDisplayerComponent {
   @Output()
   changeTitleEvent = new EventEmitter<string>();
 
+  @Output()
+  updateRequest = new EventEmitter();
+
   onChangeTitle(event) {
     this.changeTitleEvent.emit(event);
   }
 
 
+  ngAfterViewInit(){
+    this.loseFocus();
+  }
+
+  loseFocus(){
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);
+  }
 
 }

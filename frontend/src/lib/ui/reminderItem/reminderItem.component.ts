@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'reminderItem',
@@ -15,6 +15,9 @@ export class ReminderItemComponent {
   @Input()
   date:string;
 
+  @Input()
+  flagged:boolean;
+
   @Output()
   deleteReminderItemEvent = new EventEmitter();
 
@@ -27,8 +30,11 @@ export class ReminderItemComponent {
   @Output()
   toggleFlagEvent = new EventEmitter<boolean>();
 
+  @ViewChild('inputName') input : ElementRef
+
   checkboxMarked:boolean = false;
-  flagged:boolean = false;
+
+
 
   timerDeleteReminderItem() {
     this.checkboxMarked=true;
@@ -54,4 +60,7 @@ export class ReminderItemComponent {
     this.toggleFlagEvent.emit(this.flagged);
   }
 
+  ngAfterViewInit(){
+    this.input.nativeElement.focus();
+  }
 }

@@ -34,8 +34,24 @@ width: 45%;
   // position: absolute;
 }
 
+
+
+.todayContainer:hover{
+  background-color: #636363;
+  border-radius: 3%;
+}
+
 .space {
   width: 5%;
+}
+
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .flaggedContainer {
@@ -49,6 +65,11 @@ width: 45%;
 // font-size: 200%;
 // white-space: nowrap;
   // position: absolute;
+}
+
+.flaggedContainer:hover{
+  background-color: #636363;
+  border-radius: 3%;
 }
 
 .quantity {

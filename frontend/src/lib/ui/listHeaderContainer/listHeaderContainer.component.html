@@ -2,8 +2,10 @@
   *ngFor="let list of lists"
   [list]="list"
   (onDisplay)="emitOnDisplay($event)"
+  (onTitleChangeEvent)="changeListTitle(list, $event)"
+  (onDeleteEvent)="onDeleteList(list)"
   ></listHeader>
 
-    <div (click)="addEmptyList()" class="addButtonContainer">
+    <div (click)="requestNewList()" class="addButtonContainer">
       <img class="addButton" src="assets/add-button.svg"/>
     </div>

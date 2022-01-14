@@ -16,19 +16,33 @@ export class ListHeaderContainerComponent {
   @Output()
   onDisplay = new EventEmitter<ListModel>();
 
+  @Output()
+  deleteListEvent = new EventEmitter<ListModel>();
+
+  @Output()
+  newListEvent = new EventEmitter<ListModel>();
+
+  @Output()
+  changeTitleEvent = new EventEmitter<[ListModel, string]>();
+
+
    emitOnDisplay(event) {
      this.onDisplay.emit(event);
    }
 
-   addEmptyList() {
-    this.lists.push({
-      id: (Math.random() * 10000) | 0,
-      name: 'new List',
-      position: 0,
-      reminderItems: [],
-    });
+   requestNewList(){
+     this.newListEvent.emit();
+   }
+
+
+  changeListTitle(list ,event){
+    this.changeTitleEvent.emit([list,event]);
   }
 
+  onDeleteList(list){
+    this.deleteListEvent.emit(list);
+
+  }
 
   // deleteColumn(column:ColumnModel) {
   //   var index = this.columns.indexOf(column);

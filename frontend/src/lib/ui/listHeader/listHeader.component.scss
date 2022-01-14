@@ -19,3 +19,28 @@
   transform: translateY(-3px);
   box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
 }
+
+.input {
+  font-size: 130%;
+  background: transparent;
+  border: transparent;
+  width: 80%;
+}
+.symbol {
+  width: 20px;
+}
+
+.symbol:hover {
+  transform: translateY(-3px);
+}
+
+.spacer{
+  width: 10px;
+}
+
+.itemCounter{
+  margin-top: -10%;
+  margin-left: -7.5%;
+  color: rgb(92, 88, 88);
+  font-size: 80%;
+}
