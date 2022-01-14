@@ -35,7 +35,7 @@ string Manager::postList(std::string request) {
 
     List parsedList = parsedListOptional.value();
 
-    std::optional<List> postedList = repository.postList(parsedList.getName(), parsedList.getPos());
+    std::optional<List> postedList = repository.postList(parsedList.getName());
     if (postedList) {
         return parser.convertToApiString(postedList.value());
     } else {
@@ -52,7 +52,7 @@ string Manager::putList(int listID, std::string request) {
 
     List parsedList = parsedListOptional.value();
 
-    std::optional<List> putList = repository.putList(listID, parsedList.getName(), parsedList.getPos());
+    std::optional<List> putList = repository.putList(listID, parsedList.getName());
 
     if (putList) {
         return parser.convertToApiString(putList.value());
@@ -86,7 +86,7 @@ string Manager::postReminder(int listID, std::string request) {
         return parser.getEmptyResponseString();
 
     ReminderItem reminderItem = parsedReminderOptional.value();
-    std::optional<ReminderItem> postedItem = repository.postReminderItem(listID, reminderItem.getTitle(), reminderItem.getPos());
+    std::optional<ReminderItem> postedItem = repository.postReminderItem(listID, reminderItem.getTitle());
 
     if (postedItem) {
         return parser.convertToApiString(postedItem.value());
@@ -113,7 +113,7 @@ string Manager::putReminder(int reminderID, std::string request) {
     }
 
     ReminderItem reminder = parsedItemOptional.value();
-    std::optional<ReminderItem> putItem = repository.putReminderItem(reminderID, reminder.getTitle(), reminder.getPos(), reminder.getTimestamp(), reminder.isFlagged());
+    std::optional<ReminderItem> putItem = repository.putReminderItem(reminderID, reminder.getTitle(), reminder.getTimestamp(), reminder.isFlagged());
 
     if (putItem) {
         return parser.convertToApiString(putItem.value());

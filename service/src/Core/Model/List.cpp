@@ -2,8 +2,8 @@
 
 using namespace Reminder::Core::Model;
 
-List::List(int id, std::string givenName, int givenPosition)
-    : id(id), name(givenName), position(givenPosition) {}
+List::List(int id, std::string givenName)
+    : id(id), name(givenName) {}
 
 int List::getId() const {
     return id;
@@ -11,10 +11,6 @@ int List::getId() const {
 
 std::string List::getName() const {
     return name;
-}
-
-int List::getPos() const {
-    return position;
 }
 
 std::vector<ReminderItem> List::getReminders() const {
@@ -27,10 +23,6 @@ void List::setID(int givenId) {
 
 void List::setName(std::string givenName) {
     name = givenName;
-}
-
-void List::setPos(int givenPos) {
-    position = givenPos;
 }
 
 void List::addReminder(ReminderItem &givenReminder) {

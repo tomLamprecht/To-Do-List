@@ -20,7 +20,6 @@ rapidjson::Value JsonParser::getJsonValueFromModel(List const &list, rapidjson::
 
     jsonColumn.AddMember("id", list.getId(), allocator);
     jsonColumn.AddMember("name", Value(list.getName().c_str(), allocator), allocator);
-    jsonColumn.AddMember("position", list.getPos(), allocator);
 
     Value jsonItems(kArrayType);
 
@@ -44,7 +43,6 @@ rapidjson::Value JsonParser::getJsonValueFromModel(ReminderItem const &item, rap
     Value jsonItem(kObjectType);
     jsonItem.AddMember("id", item.getId(), allocator);
     jsonItem.AddMember("title", Value(item.getTitle().c_str(), allocator), allocator);
-    jsonItem.AddMember("position", item.getPos(), allocator);
     jsonItem.AddMember("timestamp", Value(item.getTimestamp().c_str(), allocator), allocator);
     jsonItem.AddMember("flag", item.isFlagged(), allocator);
 
@@ -98,8 +96,7 @@ std::optional<List> JsonParser::convertListToModel(int listId, std::string &requ
     document.Parse(request.c_str());
     if (true == isValidList(document)) {
         std::string name = document["name"].GetString();
-        int position = document["position"].GetInt();
-        resultList = List(listId, name, position);
+        resultList = List(listId, name);
     }
     return resultList;
 }
@@ -111,9 +108,6 @@ bool JsonParser::isValidList(rapidjson::Document const &document) {
         isValid = false;
     }
     if (false == document["name"].IsString()) {
-        isValid = false;
-    }
-    if (false == document["position"].IsInt()) {
         isValid = false;
     }
 
@@ -129,9 +123,6 @@ bool JsonParser::isValidItem(rapidjson::Document const &document) {
     if (false == document["title"].IsString()) {
         isValid = false;
     }
-    if (false == document["position"].IsInt()) {
-        isValid = false;
-    }
 
     return isValid;
 }
@@ -144,11 +135,10 @@ std::optional<ReminderItem> JsonParser::convertReminderItemToModel(int itemId, s
 
     if (true == isValidItem(document)) {
         std::string title = document["title"].GetString();
-        int position = document["position"].GetInt();
         string timestamp = document["timestamp"].GetString();
         bool flag = document["flag"].GetBool();
 
-        resultItem = ReminderItem(itemId, title, position, timestamp, flag);
+        resultItem = ReminderItem(itemId, title, timestamp, flag);
     }
     return resultItem;
 }
