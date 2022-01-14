@@ -19,12 +19,15 @@ export class ListHeaderContainerComponent {
   @Output()
   deleteListEvent = new EventEmitter<ListModel>();
 
+<<<<<<< HEAD
   @Output()
   newListEvent = new EventEmitter<ListModel>();
 
   @Output()
   changeTitleEvent = new EventEmitter<[ListModel, string]>();
 
+=======
+>>>>>>> e75614a3212424acd7b4e55e1bf3d92e51b9136b
 
    emitOnDisplay(event) {
      this.onDisplay.emit(event);
@@ -39,6 +42,13 @@ export class ListHeaderContainerComponent {
     this.changeTitleEvent.emit([list,event]);
   }
 
+<<<<<<< HEAD
+=======
+  changeListTitle(list ,event){
+    list.name = event;
+  }
+
+>>>>>>> e75614a3212424acd7b4e55e1bf3d92e51b9136b
   onDeleteList(list){
     this.deleteListEvent.emit(list);
 

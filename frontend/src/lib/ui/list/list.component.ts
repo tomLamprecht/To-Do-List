@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, Output, SimpleChange } from '@angular/core';
+<<<<<<< HEAD
 import { BackendService } from 'src/lib/feature/backend.service';
+=======
+>>>>>>> e75614a3212424acd7b4e55e1bf3d92e51b9136b
 import { ReminderItemModel } from '../../data-access/models/reminderItemModel';
 
 @Component({
@@ -34,6 +37,7 @@ export class ListComponent {
   deleteReminderItem(reminderItem:ReminderItemModel) {
     var index = this.reminderItems.indexOf(reminderItem);
     this.reminderItems.splice(index, 1);
+<<<<<<< HEAD
     this.backendService.deleteReminder(reminderItem.id);
     this.updateRequest.emit();
   }
@@ -41,6 +45,8 @@ export class ListComponent {
 
   updateReminderItem(reminderItem){
     this.backendService.putReminder(reminderItem.id, reminderItem.title, reminderItem.position, reminderItem.timestamp, reminderItem.flag);
+=======
+>>>>>>> e75614a3212424acd7b4e55e1bf3d92e51b9136b
     this.updateRequest.emit();
   }
 
@@ -51,7 +57,11 @@ export class ListComponent {
 
   changeReminderDate(reminderItem, event) {
     reminderItem.timestamp = event;
+<<<<<<< HEAD
     this.updateReminderItem(reminderItem);
+=======
+    this.updateRequest.emit();
+>>>>>>> e75614a3212424acd7b4e55e1bf3d92e51b9136b
   }
 
   onChangeTitle(event) {
@@ -60,7 +70,11 @@ export class ListComponent {
 
   onToggleFlag(reminderItem:ReminderItemModel, flag:boolean) {
     reminderItem.flag = flag;
+<<<<<<< HEAD
     this.updateReminderItem(reminderItem);
+=======
+    this.updateRequest.emit();
+>>>>>>> e75614a3212424acd7b4e55e1bf3d92e51b9136b
   }
 
   plsUnfocus:boolean = false;

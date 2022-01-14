@@ -2,7 +2,11 @@
 
 <div class="container">
   <div class="filterContainer">
+<<<<<<< HEAD
     <div class="todayContainer" (click)="todayClicked()">
+=======
+    <div class="todayContainer">
+>>>>>>> e75614a3212424acd7b4e55e1bf3d92e51b9136b
       <div class="quantity">   <label class="unselectable"> {{todayCounter}}</label></div>
       <img width="30" src="assets/calender-button-icon.svg"/>
       <label class="unselectable"> Today </label>
@@ -10,7 +14,11 @@
 
     <div class="space"></div>
 
+<<<<<<< HEAD
     <div class="flaggedContainer" (click)="flagClicked()">
+=======
+    <div class="flaggedContainer">
+>>>>>>> e75614a3212424acd7b4e55e1bf3d92e51b9136b
       <div class="quantity"><label class="unselectable"> {{flagCounter}}</label></div>
       <img width="25" src="assets/flagged-icon.svg"/>
       <label class="unselectable"> Flagged </label>
@@ -23,6 +31,7 @@
      [lists]="lists"
      (onDisplay)="updateDisplayList($event)"
      (deleteListEvent)="onDeleteList($event)"
+<<<<<<< HEAD
      (newListEvent)="createNewList()"
      (changeTitleEvent)="changeListTitle(($event)[1], ($event)[0])"
      ></listHeaderContainer></div>
@@ -33,5 +42,10 @@
       (updateRequest)="updateCounters()"
     >
     </listDisplayer>
+=======
+     ></listHeaderContainer></div>
+</div>
+<listDisplayer *ngIf="displayList != undefined" [displayList]="displayList" (changeTitleEvent)="changeListTitle($event, displayList)" (updateRequest)="updateCounters()"></listDisplayer>
+>>>>>>> e75614a3212424acd7b4e55e1bf3d92e51b9136b
 
 </div>
