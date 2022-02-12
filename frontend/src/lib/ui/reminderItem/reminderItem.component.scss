@@ -2,8 +2,8 @@
   border-radius: 4px;
   border: 1px solid #eee;
   background-color: #fafafa;
-  height: 40px;
-  width: 200px;
+  height: 0px;
+  width: 0px;
   margin: 0 8px 16px;
   padding: 16px;
   display: flex;
@@ -11,6 +11,15 @@
   align-items: center;
   transition: all 0.2s ease-in-out;
   line-height: 24px;
+  animation: create 250ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes create {
+  100% {
+    width: 200px;
+    height: 40px;
+  }
 }
 
 .card:hover {

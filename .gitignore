@@ -47,6 +47,7 @@ build
 # database
 reminder-app.db
 
+
 # python
 venv/
 __pycache__/

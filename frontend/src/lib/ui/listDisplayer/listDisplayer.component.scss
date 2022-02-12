@@ -4,9 +4,23 @@
   background-color: #353534;
   border-radius: 10%;
   // align-items: flex-start;
+  width: 100%;
   align-items: center;
   justify-content: center;
   padding: 25px;
+  animation: createBoard 250ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes createBoard {
+  0% {
+    max-height: 0;
+  }
+
+  100% {
+    width: 100%;
+    max-height: 100%;
+  }
 }
 
 .title {

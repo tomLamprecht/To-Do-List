@@ -22,7 +22,9 @@ export class ListHeaderComponent {
   @Output()
   onDeleteEvent = new EventEmitter();
 
-    @ViewChild('inputHeader') input : ElementRef
+  @ViewChild('inputHeader') input : ElementRef
+
+  @ViewChild('header') header : ElementRef
 
    emitOnDisplay() {
      this.onDisplay.emit(this.list);

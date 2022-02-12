@@ -41,7 +41,7 @@ export class BoardComponent {
   }
 
   loseFocusOnDelay(){
-    setTimeout(() => {this.loseFocus()} , 1)
+    setTimeout(() => {this.loseFocus()} , 20)
   }
 
   loseFocus(){

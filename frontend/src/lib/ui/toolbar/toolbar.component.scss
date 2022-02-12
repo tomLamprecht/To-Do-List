@@ -3,14 +3,15 @@
 }
 
 .toolbar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: 60px;
   display: flex;
   align-items: center;
-  background-color: #b5b6b5;
+  //background-color: #b5b6b5;
+  background-color: transparent;
   color: black;
   font-weight: 700;
 }

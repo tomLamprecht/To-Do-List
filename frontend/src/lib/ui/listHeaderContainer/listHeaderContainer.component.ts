@@ -44,6 +44,7 @@ export class ListHeaderContainerComponent {
 
   }
 
+
   // deleteColumn(column:ColumnModel) {
   //   var index = this.columns.indexOf(column);
   //   this.columns.splice(index, 1);
