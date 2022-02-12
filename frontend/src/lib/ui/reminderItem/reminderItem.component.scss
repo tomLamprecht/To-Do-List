@@ -2,8 +2,8 @@
   border-radius: 4px;
   border: 1px solid #eee;
   background-color: #fafafa;
-  height: 0px;
-  width: 0px;
+  height: 40px;
+  width: 200px;
   margin: 0 8px 16px;
   padding: 16px;
   display: flex;
@@ -11,15 +11,49 @@
   align-items: center;
   transition: all 0.2s ease-in-out;
   line-height: 24px;
-  animation: create 250ms;
+  animation: create 400ms;
   animation-fill-mode: forwards;
 }
 
+
+
 @keyframes create {
-  100% {
-    width: 200px;
-    height: 40px;
-  }
+  0% {
+    opacity: 0;
+     transform: translateX(300px);
+}
+
+70% {
+    opacity: 1;
+    transform: translateX(-50px);
+}
+
+100% {
+    opacity: 1;
+    transform: translateX(0);
+}
+}
+
+@keyframes delete{
+  0% {
+    opacity: 1;
+    transform: translateX(0) rotateZ(0);
+}
+
+50% {
+    opacity: 1;
+    transform: translateX(200px) rotateZ(0);
+}
+
+75% {
+    opacity: 1;
+    transform: translateX(220px) rotateZ(30deg);
+}
+
+100% {
+    opacity: 0;
+    transform: translateX(250px)  translateY(400px) rotateZ(70deg)  ;
+}
 }
 
 .card:hover {
@@ -62,6 +96,22 @@
   height: 18px;
   color: rgb(254, 254, 254);
   // margin-right: 5px;
+}
+
+.cardDelete {
+  border-radius: 4px;
+  border: 1px solid #eee;
+  background-color: #fafafa;
+  height: 40px;
+  width: 200px;
+  margin: 0 8px 16px;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  line-height: 24px;
+  animation: delete 1s;
 }
 
 .checkboxButton:hover {

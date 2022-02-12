@@ -57,12 +57,14 @@ export class BoardComponent {
   }
 
   updateCounters(){
-    console.log("Updating...");
     setTimeout( () => {
       this.backendService.getFlagList().subscribe( (resp) => this.flagCounter = (resp.reminderItems == undefined) ? 0 : resp.reminderItems.length);
       this.backendService.getTodayList().subscribe( (resp) => this.todayCounter = (resp.reminderItems == undefined) ? 0 : resp.reminderItems.length);
-      this.backendService.getLists().subscribe( (resp) => {this.lists = resp; this.loseFocusOnDelay() });
-    }, 1)
+    }, 200)
+  }
+
+  updateLists(){
+    this.backendService.getLists().subscribe( (resp) => {this.lists = resp; this.loseFocusOnDelay() });
   }
 
   onDeleteList(list){

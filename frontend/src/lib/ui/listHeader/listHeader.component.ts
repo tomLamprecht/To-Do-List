@@ -47,7 +47,15 @@ export class ListHeaderComponent {
 
     onDelete(event){
       event.stopPropagation();
-      this.onDeleteEvent.emit();
+      this.header.nativeElement.className = "listHeaderDelete";
+      let temp = this.onDeleteEvent;
+      let animations = document.getElementById('listheader' + this.list.id).getAnimations();
+      for( let animation of animations){
+        if (animation["animationName"] == "fallAway"){
+          animation["finished"].then( function(value) { temp.emit(); } , function(reason){console.log("error");});
+        }
+      }
+
     }
 
 }

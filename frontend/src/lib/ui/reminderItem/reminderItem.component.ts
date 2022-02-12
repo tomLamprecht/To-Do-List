@@ -43,7 +43,16 @@ export class ReminderItemComponent {
 
   deleteReminderItem() {
     if(this.checkboxMarked) {
-      this.deleteReminderItemEvent.emit();
+      let element = document.getElementById("reminderItem" + this.idReminderItem);
+      element.className = "cardDelete";
+      let animations = element.getAnimations();
+      let temp = this.deleteReminderItemEvent;
+      for( let animation of animations){
+        if (animation["animationName"] == "delete"){
+          animation["finished"].then( function(value) { temp.emit(); } , function(reason){console.log("error");});
+        }
+      }
+      // this.deleteReminderItemEvent.emit();
     }
   }
 

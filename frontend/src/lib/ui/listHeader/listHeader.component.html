@@ -1,4 +1,4 @@
-<div class="listHeader" (click)="emitOnDisplay()">
+<div #header [id]="'listheader' + list.id" class="listHeader" (click)="emitOnDisplay()">
   <label class="itemCounter">{{list.reminderItems.length}}</label>
   <div class="spacer"></div>
   <input #inputHeader (change)="onTitleChange($event)" onfocusout="disabled = true" class="input" [value]="list.name" disabled >

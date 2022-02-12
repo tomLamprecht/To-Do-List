@@ -19,10 +19,19 @@ export class ListDisplayerComponent {
   @Output()
   updateRequest = new EventEmitter();
 
+  @Output()
+  specialUpdateRequest = new EventEmitter();
+
   onChangeTitle(event) {
     this.changeTitleEvent.emit(event);
   }
 
+  requestUpdate(id){
+    this.updateRequest.emit()
+    if( id == -1){
+      this.specialUpdateRequest.emit();
+    }
+  }
 
   ngAfterViewInit(){
     this.loseFocus();

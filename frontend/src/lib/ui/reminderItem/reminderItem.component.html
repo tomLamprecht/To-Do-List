@@ -1,4 +1,4 @@
-<div class="card">
+<div [id]="'reminderItem' + idReminderItem" class="card">
   <img *ngIf="!checkboxMarked" (click)="timerDeleteReminderItem()" class="checkboxButton" src="assets/checkbox_unchecked.svg"/>
   <img *ngIf="checkboxMarked" (click)="checkboxMarked=false" class="checkboxButton" src="assets/checkbox_checked.svg"/>
   <div class="reminderItem">
