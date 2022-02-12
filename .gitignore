@@ -45,7 +45,7 @@ _deps
 build
 
 # database
-kanban-board.db
+reminder-app.db
 
 # python
 venv/

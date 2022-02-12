@@ -131,7 +131,7 @@ std::vector<List> SQLiteRepository::getLists() {
 std::optional<List> SQLiteRepository::getList(int id) {
     string sqlSelect = "SELECT * FROM list WHERE id=" + to_string(id) + ";";
     char *errorMessage = nullptr;
-    //this is done to reserve the needed memory
+    // this is done to reserve the needed memory
     List list(-1, "");
 
     vector<ReminderItem> tempItems = getReminderItems(id);
@@ -212,7 +212,7 @@ void SQLiteRepository::deleteList(int id) {
     result = sqlite3_exec(database, sqlDelete.c_str(), NULL, 0, &errorMessage);
     handleSQLError(result, errorMessage);
 
-    //DELETE ITEMS OF THIS LIST
+    // DELETE ITEMS OF THIS LIST
     sqlDelete = "DELETE FROM reminder WHERE list_id=" + to_string(id) + ";";
     errorMessage = nullptr;
     result = sqlite3_exec(database, sqlDelete.c_str(), NULL, 0, &errorMessage);
@@ -297,8 +297,8 @@ void SQLiteRepository::deleteReminder(int id) {
     handleSQLError(result, errorMessage);
 }
 
-//The method expects a SQL statement which results are entries of the "reminder" table
-//Every other statement could lead to a crash
+// The method expects a SQL statement which results are entries of the "reminder" table
+// Every other statement could lead to a crash
 std::optional<List> SQLiteRepository::getListOfRemindersBySQL(string sqlStatement, string listName) {
     char *errorMessage = nullptr;
     int result = 0;
@@ -368,7 +368,7 @@ int SQLiteRepository::getReminderItemCallback(void *data, int numberOfColumns, c
     int id = std::stoi(values[0]);
     string title = values[1];
     string date = values[2];
-    bool flag = to_bool(values[5]);
+    bool flag = to_bool(values[4]);
     ReminderItem temp(id, title, date, flag);
     items->push_back(temp);
     return 0;

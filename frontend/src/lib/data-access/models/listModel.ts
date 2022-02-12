@@ -3,7 +3,6 @@ import { ReminderItemModel } from './reminderItemModel';
 export interface ListModel {
   id: number;
   name: String;
-  position: number;
   reminderItems: ReminderItemModel[];
 }
 

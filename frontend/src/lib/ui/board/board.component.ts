@@ -37,7 +37,7 @@ export class BoardComponent {
 
   changeListTitle(event, list) {
     list.name = event;
-    this.backendService.putList(list.id, list.name, list.position);
+    this.backendService.putList(list.id, list.name);
   }
 
   loseFocusOnDelay(){
@@ -76,7 +76,7 @@ export class BoardComponent {
   }
 
   createNewList(){
-    this.backendService.postList("new List", this.lists.length).subscribe( (list) => this.lists.push(list));
+    this.backendService.postList("new List").subscribe( (list) => this.lists.push(list));
   }
 
   ngOnInit(){

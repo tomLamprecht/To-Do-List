@@ -28,7 +28,7 @@ export class ListComponent {
 
   addEmptyReminderItem() {
 
-    this.backendService.postReminder(this.idList, "New Reminder", this.reminderItems.length, "", "0").subscribe( (resp) => this.reminderItems.push(resp));
+    this.backendService.postReminder(this.idList, "New Reminder", this.reminderItems.length, "").subscribe( (resp) => this.reminderItems.push(resp));
   }
 
   deleteReminderItem(reminderItem:ReminderItemModel) {
@@ -40,7 +40,7 @@ export class ListComponent {
 
 
   updateReminderItem(reminderItem){
-    this.backendService.putReminder(reminderItem.id, reminderItem.title, reminderItem.position, reminderItem.timestamp, reminderItem.flag);
+    this.backendService.putReminder(reminderItem.id, reminderItem.title, reminderItem.timestamp, reminderItem.flag);
     this.updateRequest.emit();
   }
 

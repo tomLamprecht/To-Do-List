@@ -19,24 +19,24 @@ export class BackendService{
     this.httpClient.delete(this.ip+"/api/board/lists/"+listID).subscribe( (resp) => {});
   }
 
-  postList(name, position):Observable<ListModel>{
-    return this.httpClient.post<ListModel>(this.ip+"/api/board/lists", {name, position});
+  postList(name):Observable<ListModel>{
+    return this.httpClient.post<ListModel>(this.ip+"/api/board/lists", {name});
   }
 
-  putList(listId, name, position){
-    this.httpClient.put(this.ip+"/api/board/lists/"+listId, {name, position} ).subscribe((resp) => {});
+  putList(listId, name){
+    this.httpClient.put(this.ip+"/api/board/lists/"+listId, {name} ).subscribe((resp) => {});
   }
 
-  postReminder(listId, title , position, timestamp, flag):Observable<ReminderItemModel>{
-    return this.httpClient.post<ReminderItemModel>(this.ip+"/api/board/lists/" + listId + "/reminders", {title, position, timestamp, flag});
+  postReminder(listId, title, timestamp, flag):Observable<ReminderItemModel>{
+    return this.httpClient.post<ReminderItemModel>(this.ip+"/api/board/lists/" + listId + "/reminders", {title, timestamp, flag});
   }
 
   deleteReminder(reminderId){
     this.httpClient.delete(this.ip+"/api/board/reminders/"+reminderId).subscribe( (resp) => {});
   }
 
-  putReminder(reminderId, title , position, timestamp, flag){
-    this.httpClient.put(this.ip+"/api/board/reminders/"+reminderId, {title, position, timestamp, flag}).subscribe( (resp) => {})
+  putReminder(reminderId, title, timestamp, flag){
+    this.httpClient.put(this.ip+"/api/board/reminders/"+reminderId, {title, timestamp, flag}).subscribe( (resp) => {})
   }
 
   getFlagList():Observable<ListModel>{
