@@ -4,7 +4,7 @@ import { Observable, Subject } from "rxjs";
 import { ListModel } from "../data-access/models/listModel";
 import { ReminderItemModel } from "../data-access/models/reminderItemModel";
 
-@Injectable ({ providedIn : 'root'})
+@Injectable ()
 export class BackendService{
   constructor(private httpClient: HttpClient){}
 
@@ -46,8 +46,8 @@ export class BackendService{
   getTodayList():Observable<ListModel>{
     const d = new Date();
     let day = (d.getDate().toString().length == 1 ? "0" : "") + d.getDate();
-
-    let date ="'" + d.getFullYear() + "-" + d.getMonth()+1 +"-" + day + "'";
+    let month = ((d.getMonth()+1).toString().length == 1 ? "0" : "") + (d.getMonth()+1);
+    let date ="'" + d.getFullYear() + "-" + month +"-" + day + "'";
     let resp = new Subject<ListModel>();
     return  this.httpClient.get<ListModel>(this.ip+"/api/board/reminders/withTimestamp/"+date);
   }

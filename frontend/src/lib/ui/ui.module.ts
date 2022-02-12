@@ -8,11 +8,12 @@ import { ListHeaderComponent } from 'src/lib/ui/listHeader/listHeader.component'
 import { ListHeaderContainerComponent } from 'src/lib/ui/listHeaderContainer/listHeaderContainer.component';
 import { ReminderItemComponent } from 'src/lib/ui/reminderItem/reminderItem.component';
 import { ToolbarComponent } from 'src/lib/ui/toolbar/toolbar.component';
+import { BackendService } from '../feature/backend.service';
 
 @NgModule({
   declarations: [ToolbarComponent, ListDisplayerComponent, ListComponent, ReminderItemComponent, BoardComponent, ListHeaderComponent, ListHeaderContainerComponent],
   imports: [HttpClientModule, BrowserModule],
-  providers: [],
+  providers: [BackendService],
   exports: [ToolbarComponent, BoardComponent]
 })
 export class UiModule {}

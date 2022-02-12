@@ -28,7 +28,7 @@ export class ListComponent {
 
   addEmptyReminderItem() {
 
-    this.backendService.postReminder(this.idList, "New Reminder", this.reminderItems.length, "").subscribe( (resp) => this.reminderItems.push(resp));
+    this.backendService.postReminder(this.idList, "New Reminder", "", "0").subscribe( (resp) => this.reminderItems.push(resp));
   }
 
   deleteReminderItem(reminderItem:ReminderItemModel) {
