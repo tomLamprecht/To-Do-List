@@ -34,14 +34,12 @@ export class ListComponent {
   deleteReminderItem(reminderItem:ReminderItemModel) {
     var index = this.reminderItems.indexOf(reminderItem);
     this.reminderItems.splice(index, 1);
-    this.backendService.deleteReminder(reminderItem.id);
-    this.updateRequest.emit();
+    this.backendService.deleteReminder(reminderItem.id).subscribe(resp => {this.updateRequest.emit();});
   }
 
 
   updateReminderItem(reminderItem){
-    this.backendService.putReminder(reminderItem.id, reminderItem.title, reminderItem.timestamp, reminderItem.flag);
-    this.updateRequest.emit();
+    this.backendService.putReminder(reminderItem.id, reminderItem.title, reminderItem.timestamp, reminderItem.flag).subscribe( (resp) => {this.updateRequest.emit();});
   }
 
   renameReminderItem(reminderItem, event) {

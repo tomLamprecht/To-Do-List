@@ -37,7 +37,7 @@ export class BoardComponent {
 
   changeListTitle(event, list) {
     list.name = event;
-    this.backendService.putList(list.id, list.name);
+    this.backendService.putList(list.id, list.name).subscribe( (resp) => {});
   }
 
   loseFocusOnDelay(){
@@ -57,14 +57,12 @@ export class BoardComponent {
   }
 
   updateCounters(){
-    setTimeout( () => {
       this.backendService.getFlagList().subscribe( (resp) => this.flagCounter = (resp.reminderItems == undefined) ? 0 : resp.reminderItems.length);
       this.backendService.getTodayList().subscribe( (resp) => this.todayCounter = (resp.reminderItems == undefined) ? 0 : resp.reminderItems.length);
-    }, 200)
   }
 
   updateLists(){
-    this.backendService.getLists().subscribe( (resp) => {this.lists = resp; this.loseFocusOnDelay() });
+    this.backendService.getLists().subscribe( (resp) => {this.lists = resp; console.log(resp) ;this.loseFocusOnDelay() });
   }
 
   onDeleteList(list){
@@ -73,8 +71,7 @@ export class BoardComponent {
     if(this.displayList == list)
       this.displayList = undefined;
 
-    this.backendService.deleteList(list.id);
-    this.updateCounters();
+    this.backendService.deleteList(list.id).subscribe( (resp) => {this.updateCounters()});
   }
 
   createNewList(){

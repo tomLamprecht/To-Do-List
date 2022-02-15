@@ -96,16 +96,6 @@ void SQLiteRepository::createDummyData() {
     handleSQLError(result, errorMessage);
 }
 
-std::string SQLiteRepository::getDatabase() {
-    string data = "";
-    string sqlQuery = "SELECT * FROM list l, reminder r";
-    int result = 0;
-    char *errorMessage;
-    result = sqlite3_exec(database, sqlQuery.c_str(), SQLiteRepository::queryCallback, &data, &errorMessage);
-    handleSQLError(result, errorMessage);
-    return data;
-}
-
 std::vector<List> SQLiteRepository::getLists() {
     string itemSqlSelect = "SELECT id FROM list;";
     char *errorMessage = nullptr;
@@ -329,17 +319,6 @@ std::optional<List> SQLiteRepository::getRemindersWithTimestamp(std::string time
 }
 
 //--------------------------------------------------------------callback methods-------------------------------------------------------------
-
-int SQLiteRepository::queryCallback(void *data, int numberOfColumns, char **fieldValues, char **columnNames) {
-    string *stringPointer = static_cast<string *>(data);
-    for (int i = 0; i < numberOfColumns; i++) {
-        *stringPointer = *stringPointer + columnNames[i] + ":" + fieldValues[i];
-        if (i < numberOfColumns - 1)
-            *stringPointer = *stringPointer + ",";
-    }
-    *stringPointer = *stringPointer + ";";
-    return 0;
-}
 
 int SQLiteRepository::getListCallback(void *data, int numberOfColumns, char **fieldValues, char **columnNames) {
     List *list = static_cast<List *>(data);

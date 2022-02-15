@@ -10,7 +10,6 @@ class RepositoryIf {
   public:
     virtual ~RepositoryIf() {}
 
-    virtual std::string getDatabase() = 0;
     virtual std::vector<Reminder::Core::Model::List> getLists() = 0;
     virtual std::optional<Reminder::Core::Model::List> getList(int id) = 0;
     virtual std::optional<Reminder::Core::Model::List> postList(std::string name) = 0;

@@ -30,17 +30,6 @@ Endpoint::~Endpoint() {
 
 void Endpoint::registerRoutes() {
 
-    CROW_ROUTE(app, "/api/board")
-        .methods("GET"_method, "POST"_method, "OPTIONS"_method)([this](const request &req, response &res) {
-            std::string result = "";
-            result = manager.getDatabase();
-
-            res.set_header("Access-Control-Allow-Origin", "*");
-            res.set_header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
-            res.write(result);
-            res.end();
-        });
-
     CROW_ROUTE(app, "/api/board/lists")
         .methods("GET"_method, "POST"_method, "OPTIONS"_method)([this](const request &req, response &res) {
             std::string jsonColumns;

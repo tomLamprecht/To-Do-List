@@ -15,10 +15,7 @@ Manager::Manager(ParserIf &givenParser, RepositoryIf &givenRepository)
 Manager::~Manager() {
 }
 
-string Manager::getDatabase() {
 
-    return repository.getDatabase();
-}
 
 string Manager::getLists() {
     std::vector<List> lists = repository.getLists();

@@ -30,8 +30,9 @@
     <listDisplayer *ngIf="displayList != undefined"
       [displayList]="displayList"
       (changeTitleEvent)="changeListTitle($event, displayList)"
-      (updateRequest)="updateCounters()"
       (specialUpdateRequest) = "updateLists()"
+      (updateRequest)="updateCounters()"
+
     >
     </listDisplayer>
 

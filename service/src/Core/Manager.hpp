@@ -14,7 +14,6 @@ class Manager {
     Manager(Reminder::Api::Parser::ParserIf &givenParser, Reminder::Repository::RepositoryIf &givenRepository);
     ~Manager();
 
-    std::string getDatabase();
     std::string getLists();
     std::string postList(std::string request);
     std::string putList(int listID, std::string request);

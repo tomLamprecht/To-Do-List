@@ -14,7 +14,6 @@ class SQLiteRepository : public RepositoryIf {
     std::optional<Reminder::Core::Model::List> getListOfRemindersBySQL(std::string sqlStatement, std::string Listname);
 
   public:
-    static int queryCallback(void *data, int numberOfColumns, char **fieldValues, char **columnNames);
     static int getListCallback(void *data, int numberOfColumns, char **fieldValues, char **columnNames);
     static int getReminderItemCallback(void *data, int numberOfColumns, char **fieldValues, char **columnNames);
     static int getIdCallback(void *data, int numberOfColumns, char **fieldValues, char **columnNames);
@@ -28,7 +27,6 @@ class SQLiteRepository : public RepositoryIf {
     void handleSQLError(int statementResult, char *errorMessage);
     static std::string const databaseFile;
 
-    virtual std::string getDatabase();
     virtual std::vector<Reminder::Core::Model::List> getLists();
     virtual std::optional<Reminder::Core::Model::List> getList(int id);
     virtual std::optional<Reminder::Core::Model::List> postList(std::string name);
