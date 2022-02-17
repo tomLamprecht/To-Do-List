@@ -7,7 +7,7 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 })
 export class ReminderItemComponent {
   @Input()
-  title = 'reminderItem'; // title: string = "item";
+  title = 'reminderItem';
 
   @Input()
   idReminderItem = 'reminderItem';
@@ -49,10 +49,9 @@ export class ReminderItemComponent {
       let temp = this.deleteReminderItemEvent;
       for( let animation of animations){
         if (animation["animationName"] == "delete"){
-          animation["finished"].then( function(value) { temp.emit(); } , function(reason){console.log("error");});
+          animation["finished"].then( function(value) { temp.emit(); } , function(reason){console.log(reason);});
         }
       }
-      // this.deleteReminderItemEvent.emit();
     }
   }
 

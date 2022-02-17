@@ -16,7 +16,7 @@ export class BackendService{
   }
 
   deleteList(listID) :Observable<{}>{
-   return  this.httpClient.delete(this.ip+"/api/board/lists/"+listID);//.subscribe( (resp) => {});
+   return  this.httpClient.delete(this.ip+"/api/board/lists/"+listID);
   }
 
   postList(name):Observable<ListModel>{
@@ -24,7 +24,7 @@ export class BackendService{
   }
 
   putList(listId, name) : Observable<{}>{
-   return  this.httpClient.put(this.ip+"/api/board/lists/"+listId, {name} );//.subscribe((resp) => {});
+   return  this.httpClient.put(this.ip+"/api/board/lists/"+listId, {name} );
   }
 
   postReminder(listId, title, timestamp, flag):Observable<ReminderItemModel>{
@@ -32,7 +32,7 @@ export class BackendService{
   }
 
   deleteReminder(reminderId): Observable<{}>{
-    return this.httpClient.delete(this.ip+"/api/board/reminders/"+reminderId);//.subscribe( (resp) => {});
+    return this.httpClient.delete(this.ip+"/api/board/reminders/"+reminderId);
   }
 
   putReminder(reminderId, title, timestamp, flag): Observable<{}>{

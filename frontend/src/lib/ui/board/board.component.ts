@@ -62,7 +62,7 @@ export class BoardComponent {
   }
 
   updateLists(){
-    this.backendService.getLists().subscribe( (resp) => {this.lists = resp; console.log(resp) ;this.loseFocusOnDelay() });
+    this.backendService.getLists().subscribe( (resp) => {this.lists = resp; this.loseFocusOnDelay() });
   }
 
   onDeleteList(list){
@@ -75,11 +75,10 @@ export class BoardComponent {
   }
 
   createNewList(){
-    this.backendService.postList("new List").subscribe( (list) => this.lists.push(list));
+    this.backendService.postList("").subscribe( (list) => this.lists.push(list));
   }
 
   ngOnInit(){
-    console.log("starting...");
     this.backendService.getLists().subscribe( (resp) => {this.lists = resp; this.loseFocusOnDelay() });
   }
 

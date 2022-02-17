@@ -1,9 +1,6 @@
 .board {
-  //margin-top: 100px; // von oben weiter nach unten verschieben
-  // display: flex;
   background-color: #353534;
   border-radius: 10%;
-  // align-items: flex-start;
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -24,16 +21,10 @@
 }
 
 .title {
-  //background-color: rgb(240, 187, 121); //background-color: aqua;
   height: 5%;
-  // width: 10%;
-  // padding: 1%;
-  // margin-left: 10px;
-  // margin-bottom: 10px;
   font-weight: 600;
   font-size: 200%;
   white-space: nowrap;
   text-align: center;
   color: #b5b6b5;
-  // position: absolute;
 }

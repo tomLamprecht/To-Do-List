@@ -44,21 +44,4 @@ export class ListHeaderContainerComponent {
 
   }
 
-
-  // deleteColumn(column:ColumnModel) {
-  //   var index = this.columns.indexOf(column);
-  //   this.columns.splice(index, 1);
-  // }
-
-  // changeColumnTitle(column, event) {
-  //   column.name = event;
-  // }
-
-  // ngAfterViewInit() {
-  //   var tmp = document.createElement("input");
-  //   document.body.appendChild(tmp);
-  //   tmp.focus();
-  //   document.body.removeChild(tmp);
-  // }
-
 }

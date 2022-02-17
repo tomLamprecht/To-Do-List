@@ -52,7 +52,7 @@ export class ListHeaderComponent {
       let animations = document.getElementById('listheader' + this.list.id).getAnimations();
       for( let animation of animations){
         if (animation["animationName"] == "fallAway"){
-          animation["finished"].then( function(value) { temp.emit(); } , function(reason){console.log("error");});
+          animation["finished"].then( function(value) { temp.emit(); } , function(reason){console.log(reason);});
         }
       }
 
